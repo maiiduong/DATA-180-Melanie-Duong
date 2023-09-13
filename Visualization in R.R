@@ -9,7 +9,7 @@ library("MASS")
 
 #1.
 #SET WORKING DIRECTORY TO THE FOLDER WHERE THE DATASET IS
-setwd("D:/Dickinson College Teaching/DATA 180")
+setwd("C:\Users\maidn\OneDrive\Desktop\DATA 180 Melanie Duong\DATA-180-Melanie-Duong\DATA-180-Melanie-Duong\particulate data.xlsx")
 
 read_excel("particulate data.xlsx") # Always keep in mind file extensions excel = .xlsx or .xls, Comma separated value = .csv
 
