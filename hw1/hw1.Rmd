@@ -36,6 +36,14 @@ a) Store the data below in a data frame object named `my_df`.
 | Frank | Twitter |
 | Gisele | Twitter |
 | Harry | Instagram |
+```{r}
+my_df <- data.frame(
+  Person = c("Alice", "Bob", "Charlie", "Denise", "Erin", "Frank", "Gisele", "Harry"),
+  Preference = c("Twitter", "Facebook", "Twitter", "Instagram", "Facebook", "Twitter", "Twitter", "Instagram")
+)
+my_df
+```
+
 
 b) What are the dimensions of `my_df`?
 
