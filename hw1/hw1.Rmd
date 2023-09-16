@@ -46,12 +46,28 @@ my_df
 
 
 b) What are the dimensions of `my_df`?
+```{r}
+dim(my_df)
+```
+
 
 c) Write R code that counts the total number of users.
+```{r}
+total_users <- nrow(my_df)
+total_users
+```
 
 d) Write R code that counts the total number of users who prefer Twitter.
+```{r}
+total_twitteruser <- sum(my_df$Preference == "Twitter")
+total_twitteruser
+```
 
 e) Write R code that returns what Gisele prefers.
+```{r}
+giselePrefer <- my_df$Preference[my_df$Person == "Gisele"]
+giselePrefer
+```
 
 ## Task 2
 a) Create a vector named `my_vec` that includes all integers from 1 to 10 (inclusive).
