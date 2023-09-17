@@ -71,10 +71,30 @@ giselePrefer
 
 ## Task 2
 a) Create a vector named `my_vec` that includes all integers from 1 to 10 (inclusive).
+```{r}
+my_vec <- seq(1, 10)
+my_vec
+```
 
 b) Replace the second element in `my_vec` with the number `99`.
+```{r}
+my_vec[2] <- 99
+my_vec
+```
 
 c) Write a function called `my_func` that prints `This element is greater than 5!` if an element in `myvec` is greater than 5, and `This element is NOT greater than 5!` otherwise.
+```{r}
+my_func <- function(my_vec){
+  for (num in my_vec) {
+    if (num > 5){
+      print("This element is greater than 5!")
+    } else {
+      print("This element is NOT greater than 5!")
+    }
+  }
+}
+my_func(my_vec)
+```
 
 ## Task 3
 a. Write a function named `get_fibonacci` that returns the n'th value in the [fibonacci sequence](https://www.mathsisfun.com/numbers/fibonacci-sequence.html). For example, `get_fibonacci(5)` should return 3; `get_fibonacci(7)` should return 8 and so on. ***Hint:** It is possible to call the same function from inside it. E.g., you can call `get_fibonacci()` from inside `get_fibonacci()`. Like inception!*
