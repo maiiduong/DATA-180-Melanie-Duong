@@ -36,6 +36,7 @@ a) Store the data below in a data frame object named `my_df`.
 | Frank | Twitter |
 | Gisele | Twitter |
 | Harry | Instagram |
+
 ```{r}
 my_df <- data.frame(
   Person = c("Alice", "Bob", "Charlie", "Denise", "Erin", "Frank", "Gisele", "Harry"),
@@ -46,43 +47,54 @@ my_df
 
 
 b) What are the dimensions of `my_df`?
+
 ```{r}
 dim(my_df)
+print("The dimensions of my_df are 8 rows and 2 columns.")
 ```
 
 
 c) Write R code that counts the total number of users.
+
 ```{r}
 total_users <- nrow(my_df)
 total_users
+print("Total number of users is 8.")
 ```
 
 d) Write R code that counts the total number of users who prefer Twitter.
+
 ```{r}
 total_twitteruser <- sum(my_df$Preference == "Twitter")
 total_twitteruser
+print("Total number of users who prefer Twitter is 4.")
 ```
 
 e) Write R code that returns what Gisele prefers.
+
 ```{r}
 giselePrefer <- my_df$Preference[my_df$Person == "Gisele"]
 giselePrefer
+print("Gisele prefers Twitter.")
 ```
 
 ## Task 2
 a) Create a vector named `my_vec` that includes all integers from 1 to 10 (inclusive).
+
 ```{r}
 my_vec <- seq(1, 10)
 my_vec
 ```
 
 b) Replace the second element in `my_vec` with the number `99`.
+
 ```{r}
 my_vec[2] <- 99
 my_vec
 ```
 
 c) Write a function called `my_func` that prints `This element is greater than 5!` if an element in `myvec` is greater than 5, and `This element is NOT greater than 5!` otherwise.
+
 ```{r}
 my_func <- function(my_vec){
   for (num in my_vec) {
@@ -99,8 +111,26 @@ my_func(my_vec)
 ## Task 3
 a. Write a function named `get_fibonacci` that returns the n'th value in the [fibonacci sequence](https://www.mathsisfun.com/numbers/fibonacci-sequence.html). For example, `get_fibonacci(5)` should return 3; `get_fibonacci(7)` should return 8 and so on. ***Hint:** It is possible to call the same function from inside it. E.g., you can call `get_fibonacci()` from inside `get_fibonacci()`. Like inception!*
 
+```{r}
+get_fibonacci <- function(n) {
+  if (n <= 0) {
+    return("Please enter a positive integer")
+  } else if (n == 1) {
+    return(0)
+  } else if (n == 2) {
+    return(1)
+  } else {
+    return(get_fibonacci(n - 1) + get_fibonacci(n - 2))
+  }
+}
+```
+
 b. Using your function in part (a), find and return the 19th value in the fibonacci sequence.
 
+```{r}
+n <- 19
+get_fibonacci(n)
+```
 
 <br>
 You are done! 🏁 Don't forget to `commit` and `push` your .Rmd file to your Github clone repository before the due date.

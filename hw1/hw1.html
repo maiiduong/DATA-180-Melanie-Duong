@@ -439,12 +439,16 @@ my_df</code></pre>
 </ol>
 <pre class="r"><code>dim(my_df)</code></pre>
 <pre><code>## [1] 8 2</code></pre>
+<pre class="r"><code>print(&quot;The dimensions of my_df are 8 rows and 2 columns.&quot;)</code></pre>
+<pre><code>## [1] &quot;The dimensions of my_df are 8 rows and 2 columns.&quot;</code></pre>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Write R code that counts the total number of users.</li>
 </ol>
 <pre class="r"><code>total_users &lt;- nrow(my_df)
 total_users</code></pre>
 <pre><code>## [1] 8</code></pre>
+<pre class="r"><code>print(&quot;Total number of users is 8.&quot;)</code></pre>
+<pre><code>## [1] &quot;Total number of users is 8.&quot;</code></pre>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Write R code that counts the total number of users who prefer
 Twitter.</li>
@@ -452,12 +456,16 @@ Twitter.</li>
 <pre class="r"><code>total_twitteruser &lt;- sum(my_df$Preference == &quot;Twitter&quot;)
 total_twitteruser</code></pre>
 <pre><code>## [1] 4</code></pre>
+<pre class="r"><code>print(&quot;Total number of users who prefer Twitter is 4.&quot;)</code></pre>
+<pre><code>## [1] &quot;Total number of users who prefer Twitter is 4.&quot;</code></pre>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Write R code that returns what Gisele prefers.</li>
 </ol>
 <pre class="r"><code>giselePrefer &lt;- my_df$Preference[my_df$Person == &quot;Gisele&quot;]
 giselePrefer</code></pre>
 <pre><code>## [1] &quot;Twitter&quot;</code></pre>
+<pre class="r"><code>print(&quot;Gisele prefers Twitter.&quot;)</code></pre>
+<pre><code>## [1] &quot;Gisele prefers Twitter.&quot;</code></pre>
 </div>
 <div id="task-2" class="section level2">
 <h2>Task 2</h2>
@@ -505,16 +513,32 @@ my_func(my_vec)</code></pre>
 <div id="task-3" class="section level2">
 <h2>Task 3</h2>
 <ol style="list-style-type: lower-alpha">
-<li><p>Write a function named <code>get_fibonacci</code> that returns
-the n’th value in the <a href="https://www.mathsisfun.com/numbers/fibonacci-sequence.html">fibonacci
+<li>Write a function named <code>get_fibonacci</code> that returns the
+n’th value in the <a href="https://www.mathsisfun.com/numbers/fibonacci-sequence.html">fibonacci
 sequence</a>. For example, <code>get_fibonacci(5)</code> should return
 3; <code>get_fibonacci(7)</code> should return 8 and so on.
 <em><strong>Hint:</strong> It is possible to call the same function from
 inside it. E.g., you can call <code>get_fibonacci()</code> from inside
-<code>get_fibonacci()</code>. Like inception!</em></p></li>
-<li><p>Using your function in part (a), find and return the 19th value
-in the fibonacci sequence.</p></li>
+<code>get_fibonacci()</code>. Like inception!</em></li>
 </ol>
+<pre class="r"><code>get_fibonacci &lt;- function(n) {
+  if (n &lt;= 0) {
+    return(&quot;Please enter a positive integer&quot;)
+  } else if (n == 1) {
+    return(0)
+  } else if (n == 2) {
+    return(1)
+  } else {
+    return(get_fibonacci(n - 1) + get_fibonacci(n - 2))
+  }
+}</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Using your function in part (a), find and return the 19th value in
+the fibonacci sequence.</li>
+</ol>
+<pre class="r"><code>n &lt;- 19
+get_fibonacci(n)</code></pre>
+<pre><code>## [1] 2584</code></pre>
 <p><br> You are done! 🏁 Don’t forget to <code>commit</code> and
 <code>push</code> your .Rmd file to your Github clone repository before
 the due date. <br></p>
