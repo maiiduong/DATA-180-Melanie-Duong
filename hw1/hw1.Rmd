@@ -12,6 +12,8 @@ author:
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output: 
   html_document
+  
+  Good job Melanie. 20/20
 ---
 <<<<<<< HEAD
 Make sure that you have accepted the hw invitation link, and working with your clone repository.
@@ -133,6 +135,8 @@ get_fibonacci <- function(n) {
     return(get_fibonacci(n - 1) + get_fibonacci(n - 2))
   }
 }
+
+get_fibonacci(5)
 ```
 
 b. Using your function in part (a), find and return the 19th value in the fibonacci sequence.
