@@ -37,10 +37,28 @@ head(Cars93)
 ## Task 1
 a) Create a Frequency table and Relative Frequency table (latter uses percentages) for the variable `Type`. Make sure to round all digits to 3 digits.
 ```{r}
+data <- data.frame(
+  Manufacturer = c("Acura", "Acura", "Audi", "Audi", "BMW", "Buick"),
+  Model = c("Integra", "Legend", "90", "100", "535i", "Century"),
+  Type = c("Small", "Midsize", "Compact", "Midsize", "Midsize", "Midsize"),
+  Min.Price = c(12.9, 29.2, 25.9, 30.8, 23.7, 14.2),
+  Price = c(15.9, 33.9, 29.1, 37.7, 30.0, 15.7)
+)
+freq_table = table(data$Type)
+freq_table <- round(freq_table, 3)
+freq_table
 
+relative_freq_table <- prop.table(freq_table)*100
+relative_freq_table <- round(relative_freq_table, 3)
+relative_freq_table
 ```
 b) Create a frequency bar graph for the variable `Type`. You can have count on the y axis.
 ```{r}
+library(ggplot2)
+bargraph <- ggplot(data = data.frame(Type = names(freq_table), Count = as.vector(freq_table)), aes(x = Type, y = Count, fill = Type)) + 
+                     geom_bar(stat = "identity") +
+                     labs(title = "Frequency Bar Graph for Type", x = "Type", y = "Count") + scale_fill_manual(values = c("lightpink",                                                          "lightgreen",                                                          "lightblue"))
+bargraph
 
 ```
 
@@ -51,14 +69,16 @@ b) Create a frequency bar graph for the variable `Type`. You can have count on t
 
 c) Create a pie chart of the variable `Type`.
 ```{r}
-
+piechart <- pie(freq_table, labels = freq_table, main = "Frequency of Type", col = c(2,3,4), cex=1.2)
+legend("topright", legend = names(freq_table), fill = c(2,3,4))
+piechart
 ```
 
 * The plot should include a title using the main argument.
 *	The names, labels, and axes sizes (cex parameter) should be set to 1.2
 
 d) What is the mode of the variable `Type`? Comment.
-
+#The mode of variable Type is Midsize.
 
 ## Task 2 
 a) Create a histogram of the variable `Horsepower`.
