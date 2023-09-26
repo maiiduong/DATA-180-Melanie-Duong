@@ -56,8 +56,8 @@ b) Create a frequency bar graph for the variable `Type`. You can have count on t
 ```{r}
 library(ggplot2)
 bargraph <- ggplot(data = data.frame(Type = names(freq_table), Count = as.vector(freq_table)), aes(x = Type, y = Count, fill = Type)) + 
-                     geom_bar(stat = "identity") +
-                     labs(title = "Frequency Bar Graph for Type", x = "Type", y = "Count") + scale_fill_manual(values = c("lightpink",                                                          "lightgreen",                                                          "lightblue"))
+                     geom_bar(stat = "identity", cex=1.2) +
+                     labs(title = "Frequency Bar Graph for Type", x = "Type", y = "Count") + guides(fill = "none")
 bargraph
 
 ```
