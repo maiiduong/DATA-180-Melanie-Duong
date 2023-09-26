@@ -83,7 +83,9 @@ d) What is the mode of the variable `Type`? Comment.
 ## Task 2 
 a) Create a histogram of the variable `Horsepower`.
 ```{r}
-
+df <- data.frame(Horsepower = c(140, 200, 172,172,208,110))
+histogram <- hist(df$Horsepower, breaks = 5, col = "lightpink", xlab = "Horsepower", ylab = "Frequency", main = "Histogram of Horsepower", cex.lab=1.2, cex.axis=1.2)
+histogram
 ```
 
 *	Your axes should be labeled
@@ -93,7 +95,10 @@ a) Create a histogram of the variable `Horsepower`.
 
 b) Create a second histogram with breaks at 25 HP increments instead of 50.
 ```{r}
-
+df <- data.frame(Horsepower = c(140, 200, 172,172,208,110))
+breaks <- seq(0, max(df)+25, by = 25)
+histogram <- hist(df$Horsepower, breaks = breaks, col = "lightpink", xlab = "Horsepower", ylab = "Frequency", main = "Histogram of Horsepower(25 HP Increments)", cex.lab=1.2, cex.axis=1.2)
+histogram
 ```
 
 * Use the breaks argument to define the classes
@@ -108,12 +113,16 @@ c) Which histogram more closely follows or rule of thumb for the suggested numbe
 ## Task 3 
 a) What is the type of variable `Passengers`? (Categorical nominal/ordinal or Numerical discrete/continuous?) What happens if we were to make a histogram for `Passengers`? What is the problem with this graph?
 ```{r}
-
+#The type of variable "Passengers" is Numerical discrete because it represents counts and it takes on distinct and separate values.
+#If we make a histogram for "Passengers", it will not be an useful graph because a histogram would create arbitrary width bins and would not convey any meaningful information about the distribution.Histogram is more appropriate for numerical continuous variable.
 ```
 
 b) Correct the problem in part (a) by creating a more appropriate visualization. Make sure to label your axes, place a title, choose a custom color as in the previous graphs. (Bonus: use factor() with levels option to display x axis values with no observations on the plot.)
 ```{r}
+data <-data.frame(Passengers = c(5,5,5,6,4,6))
+bargraph <- ggplot(data, aes(x = factor(Passengers))) + geom_bar(fill = "lightpink", color = "black") + labs(title = "Bar chart of Passengers", x = "Passengers", y = "Count")
 
+bargraph
 ```
 
 ## Task 4 
