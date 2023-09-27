@@ -37,14 +37,8 @@ head(Cars93)
 ## Task 1
 a) Create a Frequency table and Relative Frequency table (latter uses percentages) for the variable `Type`. Make sure to round all digits to 3 digits.
 ```{r}
-data <- data.frame(
-  Manufacturer = c("Acura", "Acura", "Audi", "Audi", "BMW", "Buick"),
-  Model = c("Integra", "Legend", "90", "100", "535i", "Century"),
-  Type = c("Small", "Midsize", "Compact", "Midsize", "Midsize", "Midsize"),
-  Min.Price = c(12.9, 29.2, 25.9, 30.8, 23.7, 14.2),
-  Price = c(15.9, 33.9, 29.1, 37.7, 30.0, 15.7)
-)
-freq_table = table(data$Type)
+
+freq_table = table(Cars93$Type)
 freq_table <- round(freq_table, 3)
 freq_table
 
@@ -54,10 +48,8 @@ relative_freq_table
 ```
 b) Create a frequency bar graph for the variable `Type`. You can have count on the y axis.
 ```{r}
-library(ggplot2)
-bargraph <- ggplot(data = data.frame(Type = names(freq_table), Count = as.vector(freq_table)), aes(x = Type, y = Count, fill = Type)) + 
-                     geom_bar(stat = "identity", cex=1.2) +
-                     labs(title = "Frequency Bar Graph for Type", x = "Type", y = "Count") + guides(fill = "none")
+gcolor = c("lightpink", "lightgreen", "lightblue", "lightyellow","brown", "violet")
+bargraph <- barplot(freq_table, main = "Bar graph of Type", xlab = "Type", ylab = "Frequency", cex.main=1.2, cex.lab=1.2, cex.axis = 1.2, col = gcolor)
 bargraph
 
 ```
@@ -69,8 +61,7 @@ bargraph
 
 c) Create a pie chart of the variable `Type`.
 ```{r}
-piechart <- pie(freq_table, labels = freq_table, main = "Frequency of Type", col = c(2,3,4), cex=1.2)
-legend("topright", legend = names(freq_table), fill = c(2,3,4))
+piechart <- pie(freq_table, main = "Frequency of Type", col = gcolor, cex=1.2)
 piechart
 ```
 
@@ -83,8 +74,7 @@ d) What is the mode of the variable `Type`? Comment.
 ## Task 2 
 a) Create a histogram of the variable `Horsepower`.
 ```{r}
-df <- data.frame(Horsepower = c(140, 200, 172,172,208,110))
-histogram <- hist(df$Horsepower, breaks = 5, col = "lightpink", xlab = "Horsepower", ylab = "Frequency", main = "Histogram of Horsepower", cex.lab=1.2, cex.axis=1.2)
+histogram <- hist(Cars93$Horsepower, col = "lightpink", xlab = "Horsepower", ylab = "Frequency", main = "Histogram of Horsepower", cex.lab=1.2, cex.axis=1.2)
 histogram
 ```
 
@@ -95,9 +85,8 @@ histogram
 
 b) Create a second histogram with breaks at 25 HP increments instead of 50.
 ```{r}
-df <- data.frame(Horsepower = c(140, 200, 172,172,208,110))
-breaks <- seq(0, max(df)+25, by = 25)
-histogram <- hist(df$Horsepower, breaks = breaks, col = "lightpink", xlab = "Horsepower", ylab = "Frequency", main = "Histogram of Horsepower(25 HP Increments)", cex.lab=1.2, cex.axis=1.2)
+breaks <- seq(50,300,25)
+histogram <- hist(Cars93$Horsepower, breaks = breaks, col = "lightpink", xlab = "Horsepower", ylab = "Frequency", main = "Histogram of Horsepower(25 HP Increments)", cex.main=1.2, cex.lab=1.2, cex.axis=1.2)
 histogram
 ```
 
@@ -119,24 +108,26 @@ a) What is the type of variable `Passengers`? (Categorical nominal/ordinal or Nu
 
 b) Correct the problem in part (a) by creating a more appropriate visualization. Make sure to label your axes, place a title, choose a custom color as in the previous graphs. (Bonus: use factor() with levels option to display x axis values with no observations on the plot.)
 ```{r}
-data <-data.frame(Passengers = c(5,5,5,6,4,6))
-bargraph <- ggplot(data, aes(x = factor(Passengers))) + geom_bar(fill = "lightpink", color = "black") + labs(title = "Bar chart of Passengers", x = "Passengers", y = "Count")
-
+bargraph <- barplot(table(Cars93$Passengers), col = "lightpink", xlab = "Passenger", ylab = "Frequency", main = "Histogram of Passenger", cex.axis = 1.2, cex.names = 1.2)
 bargraph
 ```
 
 ## Task 4 
 a) Make a histogram of the variable `Length` (the default breaks are fine). Other aspects of the plot should be as in part (a) in Task 2.
 ```{r}
-
+histogram <- hist(Cars93$Length, main = "Histogram of Length", xlab = "Length", ylab = "Frequency", col = "lightpink", cex=1.2)
+histogram
 ```
 
 b) What is the shape of the distribution?
-
+The distribution is symmetric.
 
 c) Find the mean and median of the variable `Length.` Do these answers meet your expectations from part (b)?
 ```{r}
-
+mean_length = mean(Cars93$Length)
+mean_length
+median_length = median(Cars93$Length)
+median_length
 ```
 
 You are done! 🏁 Don't forget to commit and push your .Rmd file to your Github repository before the due date.
