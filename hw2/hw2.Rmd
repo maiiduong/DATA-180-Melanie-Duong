@@ -95,7 +95,9 @@ histogram
 
 c) Which histogram more closely follows or rule of thumb for the suggested number of classes? Explain.
 ```{r}
-
+#The rule of thumb is the number of classes equals to the square root of n.
+sqrt(nrow(Cars93))
+#The square root of n equals approximately 9.64 and the second histogram has 10 classes while the first histogram only have 5 classes. Therefore, the second histogram follows the rule of thumb for the suggested number of classes more closely.
 ```
 
 
@@ -120,7 +122,10 @@ histogram
 ```
 
 b) What is the shape of the distribution?
-The distribution is symmetric.
+
+```{r}
+#The distribution is symmetric.
+```
 
 c) Find the mean and median of the variable `Length.` Do these answers meet your expectations from part (b)?
 ```{r}

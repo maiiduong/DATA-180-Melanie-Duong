@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2023-09-26" />
+<meta name="date" content="2023-09-27" />
 
 <title>HW 2: Visualization, Base R</title>
 
@@ -354,7 +354,7 @@ display: none;
 <h4 class="author">Melanie Duong</h4>
 <a class="author_email" href="mailto:#"><a href="mailto:duongng@dickinson.edu" class="email">duongng@dickinson.edu</a></a>
 </address>
-<h4 class="date">September 26, 2023</h4>
+<h4 class="date">September 27, 2023</h4>
 
 </div>
 
@@ -546,6 +546,10 @@ histogram &lt;- hist(Cars93$Horsepower, breaks = breaks, col = &quot;lightpink&q
 <li>Which histogram more closely follows or rule of thumb for the
 suggested number of classes? Explain.</li>
 </ol>
+<pre class="r"><code>#The rule of thumb is the number of classes equals to the square root of n.
+sqrt(nrow(Cars93))</code></pre>
+<pre><code>## [1] 9.643651</code></pre>
+<pre class="r"><code>#The square root of n equals approximately 9.64 and the second histogram has 10 classes while the first histogram only have 5 classes. Therefore, the second histogram follows the rule of thumb for the suggested number of classes more closely.</code></pre>
 </div>
 <div id="task-3" class="section level2">
 <h2>Task 3</h2>
@@ -606,10 +610,12 @@ Task 2.</li>
 ## attr(,&quot;class&quot;)
 ## [1] &quot;histogram&quot;</code></pre>
 <ol start="2" style="list-style-type: lower-alpha">
-<li><p>What is the shape of the distribution? The distribution is
-symmetric.</p></li>
-<li><p>Find the mean and median of the variable <code>Length.</code> Do
-these answers meet your expectations from part (b)?</p></li>
+<li>What is the shape of the distribution?</li>
+</ol>
+<pre class="r"><code>#The distribution is symmetric.</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Find the mean and median of the variable <code>Length.</code> Do
+these answers meet your expectations from part (b)?</li>
 </ol>
 <pre class="r"><code>mean_length = mean(Cars93$Length)
 mean_length</code></pre>
