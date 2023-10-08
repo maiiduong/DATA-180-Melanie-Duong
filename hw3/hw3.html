@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2023-08-24" />
+<meta name="date" content="2023-10-07" />
 
 <title>HW 3: Visualization, Ggplot2 &amp; Maps</title>
 
@@ -352,10 +352,10 @@ display: none;
 <h1 class="title toc-ignore">HW 3: Visualization, Ggplot2 &amp;
 Maps</h1>
 <h3 class="subtitle">Data 180, Professor Kennedy</h3>
-<h4 class="author">XXXX</h4>
-<a class="author_email" href="mailto:#"><a href="mailto:XXXX@dickinson.edu" class="email">XXXX@dickinson.edu</a></a>
+<h4 class="author">Melanie Duong</h4>
+<a class="author_email" href="mailto:#"><a href="mailto:duongng@dickinson.edu" class="email">duongng@dickinson.edu</a></a>
 </address>
-<h4 class="date">August 24, 2023</h4>
+<h4 class="date">October 07, 2023</h4>
 
 </div>
 
@@ -371,9 +371,11 @@ assignment.</p>
 <p><strong>Theme of the assignment</strong>: This time we will practice
 visualization using ggplot2, and create cool maps. Load in the
 <code>Cars93</code> dataset by running the following code chunk:</p>
-<pre class="r"><code>library(ggplot2) # keep in mind you have to install ggplot2 first via install.packages() if it&#39;s not installed in your machine
-library(MASS)
-data(Cars93)
+<pre class="r"><code>library(ggplot2) # keep in mind you have to install ggplot2 first via install.packages() if it&#39;s not installed in your machine</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.3.1</code></pre>
+<pre class="r"><code>library(MASS)</code></pre>
+<pre><code>## Warning: package &#39;MASS&#39; was built under R version 4.3.1</code></pre>
+<pre class="r"><code>data(Cars93)
 head(Cars93)</code></pre>
 <pre><code>##   Manufacturer   Model    Type Min.Price Price Max.Price MPG.city MPG.highway
 ## 1        Acura Integra   Small      12.9  15.9      18.8       25          31
@@ -471,10 +473,10 @@ barplots side by side.</li>
 #install.packages(&#39;ozmaps&#39;) # downloads the map needed
 #install.packages(&#39;sf&#39;) # package used to analyze spatial data
 library(ozmaps)</code></pre>
-<pre><code>## Warning: package &#39;ozmaps&#39; was built under R version 4.2.3</code></pre>
+<pre><code>## Warning: package &#39;ozmaps&#39; was built under R version 4.3.1</code></pre>
 <pre class="r"><code>library(sf)</code></pre>
-<pre><code>## Warning: package &#39;sf&#39; was built under R version 4.2.3</code></pre>
-<pre><code>## Linking to GEOS 3.9.3, GDAL 3.5.2, PROJ 8.2.1; sf_use_s2() is TRUE</code></pre>
+<pre><code>## Warning: package &#39;sf&#39; was built under R version 4.3.1</code></pre>
+<pre><code>## Linking to GEOS 3.11.2, GDAL 3.6.2, PROJ 9.2.0; sf_use_s2() is TRUE</code></pre>
 <pre class="r"><code>au_states &lt;- ozmaps::ozmap_states # read in spatial dataframe object
 
 # Display the data
@@ -542,15 +544,13 @@ option that goes inside <code>coord_sf()</code> is
 the <code>mapview</code> package.</p>
 <pre class="r"><code>#install.packages(&#39;mapview&#39;) # interactive display
 library(mapview)</code></pre>
-<pre><code>## Warning: package &#39;mapview&#39; was built under R version 4.2.3</code></pre>
+<pre><code>## Warning: package &#39;mapview&#39; was built under R version 4.3.1</code></pre>
 <pre><code>## The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,
-## which was just loaded, will retire in October 2023.
+## which was just loaded, were retired in October 2023.
 ## Please refer to R-spatial evolution reports for details, especially
 ## https://r-spatial.org/r/2023/05/15/evolution4.html.
 ## It may be desirable to make the sf package available;
-## package maintainers should consider adding sf to Suggests:.
-## The sp package is now running under evolution status 2
-##      (status 2 uses the sf package in place of rgdal)</code></pre>
+## package maintainers should consider adding sf to Suggests:.</code></pre>
 <p>Create an interactive map of Australia using
 <code>mapview()</code></p>
 </div>
