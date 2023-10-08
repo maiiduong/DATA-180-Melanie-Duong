@@ -40,6 +40,7 @@ Create a simple scatterplot using ggplot2 where x axis shows `EngineSize`, y axi
 
  
 ```{r}
+ggplot(Cars93, aes(x=EngineSize, y=MPG.city)) + geom_point(col = "blue", size = 2) + xlim(0,6) + ylim(10,50) + labs(y = "MPG in city", x = "Size of engine")
 
 ```
 
