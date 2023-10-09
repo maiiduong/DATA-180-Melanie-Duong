@@ -40,7 +40,7 @@ Create a simple scatterplot using ggplot2 where x axis shows `EngineSize`, y axi
 
  
 ```{r}
-ggplot(Cars93, aes(x=EngineSize, y=MPG.city)) + geom_point(col = "blue", size = 2) + xlim(0,6) + ylim(10,50) + labs(y = "MPG in city", x = "Size of engine")
+ggplot(Cars93, aes(x=EngineSize, y=MPG.city)) + geom_point(col = "blue", size = 2) + xlim(0,6) + ylim(10,50) + labs(y = "MPG per city", x = "Size of engine", title = "Scatter plot of Engine Size vs MPG per city")
 
 ```
 
@@ -49,7 +49,7 @@ Recreate the scatterplot in Task 1. Add the following functionality:
 
 * Use a different color for each car `Type`.
 ```{r}
-ggplot(Cars93, aes(x=EngineSize, y=MPG.city, color =  Type)) + geom_point(size = 2) + xlim(0,6) + ylim(10,50) + labs(y = "MPG in city", x = "Size of engine")
+ggplot(Cars93, aes(x=EngineSize, y=MPG.city, color =  Type)) + geom_point(size = 2) + xlim(0,6) + ylim(10,50) + labs(y = "MPG per city", x = "Size of engine", title = "Scatter plot of Engine Size vs MPG per city")
 ```
 
 ## Task 3
