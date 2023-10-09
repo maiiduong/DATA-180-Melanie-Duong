@@ -49,7 +49,7 @@ Recreate the scatterplot in Task 1. Add the following functionality:
 
 * Use a different color for each car `Type`.
 ```{r}
-
+ggplot(Cars93, aes(x=EngineSize, y=MPG.city, color =  Type)) + geom_point(size = 2) + xlim(0,6) + ylim(10,50) + labs(y = "MPG in city", x = "Size of engine")
 ```
 
 ## Task 3
