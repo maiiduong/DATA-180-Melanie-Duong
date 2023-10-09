@@ -70,7 +70,7 @@ Create a barplot showing count of cars by `AirBags` using ggplot2.
 * Add a title, subtitle, x axis label, y axis label, and a caption using title, subtitle, caption options inside `+ labs()`.
 
 ```{r}
-
+ggplot(Cars93, aes(x = AirBags, fill = AirBags)) + geom_bar() + labs(title = "Bar graph of airbags", subtitle = "Using ggplot2 in R", x = "Airbags", y = "Count")
 ```
 
 ## Task 5
