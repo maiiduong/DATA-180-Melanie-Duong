@@ -2,12 +2,13 @@
 title: "HW 2: Visualization, Base R"
 subtitle: "Data 180, Professor Kennedy"
 author: 
-  name: "XXXX"
-  email: "XXXX@dickinson.edu"
+  name: "Melanie Duong"
+  email: "duongng@dickinson.edu"
 date: '`r format(Sys.Date(), "%B %d, %Y")`' # no need to change date since this line grabs today's date
 output: 
   html_document
 ---
+18/20.
 
 Make sure that you have accepted the hw invitation link, and working with your clone repository.
 
@@ -38,9 +39,19 @@ head(Cars93)
 a) Create a Frequency table and Relative Frequency table (latter uses percentages) for the variable `Type`. Make sure to round all digits to 3 digits.
 ```{r}
 
+freq_table = table(Cars93$Type)
+freq_table <- round(freq_table, 3)
+freq_table
+
+relative_freq_table <- prop.table(freq_table)*100
+relative_freq_table <- round(relative_freq_table, 3)
+relative_freq_table
 ```
 b) Create a frequency bar graph for the variable `Type`. You can have count on the y axis.
 ```{r}
+gcolor = c("lightpink", "lightgreen", "lightblue", "lightyellow","brown", "violet")
+bargraph <- barplot(freq_table, main = "Bar graph of Type", xlab = "Type", ylab = "Frequency", cex.main=1.2, cex.lab=1.2, cex.axis = 1.2, col = gcolor)
+bargraph
 
 ```
 
@@ -51,19 +62,21 @@ b) Create a frequency bar graph for the variable `Type`. You can have count on t
 
 c) Create a pie chart of the variable `Type`.
 ```{r}
-
+piechart <- pie(freq_table, main = "Frequency of Type", col = gcolor, cex=1.2)
+piechart
 ```
 
 * The plot should include a title using the main argument.
 *	The names, labels, and axes sizes (cex parameter) should be set to 1.2
 
 d) What is the mode of the variable `Type`? Comment.
-
+#The mode of variable Type is Midsize.
 
 ## Task 2 
 a) Create a histogram of the variable `Horsepower`.
 ```{r}
-
+histogram <- hist(Cars93$Horsepower, col = "lightpink", xlab = "Horsepower", ylab = "Frequency", main = "Histogram of Horsepower", cex.lab=1.2, cex.axis=1.2)
+histogram
 ```
 
 *	Your axes should be labeled
@@ -73,7 +86,9 @@ a) Create a histogram of the variable `Horsepower`.
 
 b) Create a second histogram with breaks at 25 HP increments instead of 50.
 ```{r}
-
+breaks <- seq(50,300,25)
+histogram <- hist(Cars93$Horsepower, breaks = breaks, col = "lightpink", xlab = "Horsepower", ylab = "Frequency", main = "Histogram of Horsepower(25 HP Increments)", cex.main=1.2, cex.lab=1.2, cex.axis=1.2)
+histogram
 ```
 
 * Use the breaks argument to define the classes
@@ -81,33 +96,46 @@ b) Create a second histogram with breaks at 25 HP increments instead of 50.
 
 c) Which histogram more closely follows or rule of thumb for the suggested number of classes? Explain.
 ```{r}
-
+#The rule of thumb is the number of classes equals to the square root of n.
+sqrt(nrow(Cars93))
+#The square root of n equals approximately 9.64 and the second histogram has 10 classes while the first histogram only have 5 classes. Therefore, the second histogram follows the rule of thumb for the suggested number of classes more closely.
 ```
 
 
 ## Task 3 
 a) What is the type of variable `Passengers`? (Categorical nominal/ordinal or Numerical discrete/continuous?) What happens if we were to make a histogram for `Passengers`? What is the problem with this graph?
 ```{r}
-
+#The type of variable "Passengers" is Numerical discrete because it represents counts and it takes on distinct and separate values.
+#If we make a histogram for "Passengers", it will not be an useful graph because a histogram would create arbitrary width bins and would not convey any meaningful information about the distribution.Histogram is more appropriate for numerical continuous variable.
 ```
 
 b) Correct the problem in part (a) by creating a more appropriate visualization. Make sure to label your axes, place a title, choose a custom color as in the previous graphs. (Bonus: use factor() with levels option to display x axis values with no observations on the plot.)
 ```{r}
+bargraph <- barplot(table(Cars93$Passengers), col = "lightpink", xlab = "Passenger", ylab = "Frequency", main = "Histogram of Passenger", cex.axis = 1.2, cex.names = 1.2)
 
+## This bar plot should show the frequency of cars that carry 1 and 3 passengers as 0 (-2)
+bargraph
 ```
 
 ## Task 4 
 a) Make a histogram of the variable `Length` (the default breaks are fine). Other aspects of the plot should be as in part (a) in Task 2.
 ```{r}
-
+histogram <- hist(Cars93$Length, main = "Histogram of Length", xlab = "Length", ylab = "Frequency", col = "lightpink", cex=1.2)
+histogram
 ```
 
 b) What is the shape of the distribution?
 
+```{r}
+#The distribution is symmetric.
+```
 
 c) Find the mean and median of the variable `Length.` Do these answers meet your expectations from part (b)?
 ```{r}
-
+mean_length = mean(Cars93$Length)
+mean_length
+median_length = median(Cars93$Length)
+median_length
 ```
 
 You are done! 🏁 Don't forget to commit and push your .Rmd file to your Github repository before the due date.
