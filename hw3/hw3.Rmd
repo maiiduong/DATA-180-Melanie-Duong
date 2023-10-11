@@ -1,12 +1,13 @@
 ---
-title: "HW 3: Visualization, Ggplot2 & Maps"
-subtitle: "Data 180, Professor Kennedy"
-author: 
-  name: "Melanie Duong"
-  email: "duongng@dickinson.edu"
-date: '`r format(Sys.Date(), "%B %d, %Y")`' # no need to change date since this line grabs today's date
-output: 
-  html_document
+title: 'HW 3: Visualization, Ggplot2 & Maps'
+author:
+  name: Melanie Duong
+  email: duongng@dickinson.edu
+date: "`r format(Sys.Date(), "%B %d, %Y")`"
+output:
+  pdf_document: default
+  html_document: default
+subtitle: Data 180, Professor Kennedy
 ---
 
 Make sure that you have accepted the hw invitation link, and working with your clone repository.
@@ -88,8 +89,8 @@ ggplot(Cars93, aes(x = Origin, fill = AirBags)) + geom_bar(position = "dodge") +
 Load Australia's state map data via running:
 ```{r}
 # install the packages below by uncommenting the lines. You need to do this only once.
-#install.packages('ozmaps') # downloads the map needed
-#install.packages('sf') # package used to analyze spatial data
+install.packages('ozmaps') # downloads the map needed
+install.packages('sf') # package used to analyze spatial data
 library(ozmaps)
 library(sf)
 au_states <- ozmaps::ozmap_states # read in spatial dataframe object
@@ -102,13 +103,15 @@ Notice that `NAME` includes the name of a state, `geometry` includes spatial coo
 ## Task 1
 Create a map of Australia using `ggplot2`.
 ```{r}
-
+data_au <- map_data("world", region = "Australia")
+ggplot() + geom_polygon(data = data_au, aes(x=long, y=lat, group=group), fill = "lightblue", color = "black") + labs(title = "Map of Australia")
 ```
 
 ## Task 2
 Modify your map such that each state is displayed with a different color. (Hint: use the fill option as an aes setting with variable `NAME`.)
 ```{r}
-
+data_au <- map_data("world", region = "Australia")
+ggplot() + geom_sf(data = au_states, aes(fill = NAME)) + labs(title = "Map of Australia") + theme_classic()
 ```
 ## Task 3
 Read in the capital city dataframe showing each capital and its latitude and longitude information by running:
@@ -132,32 +135,35 @@ Display the capitals as points on your map from Task 1. (Hint: combine `geom_sf(
 * Use `size=2` to make points larger.
 
 ```{r}
-
+data_au <- map_data("world", region = "Australia")
+ggplot() + geom_sf(data = au_states, aes(fill = NAME)) + labs(title = "Map of Australia") + theme_classic() + geom_point(data = au_capitals, aes(x = lon, y = lat, col = "red", size = 2))
 ```
 
 
 ## Task 4
 Let's take a look at a different projection output. Change your map's projection to epsg 3112 by adding `+ coord_sf()`. Recall the option that goes inside `coord_sf()` is `st_crs(4_digit_code)`
 ```{r}
-
+data_au <- map_data("world", region = "Australia")
+ggplot() + geom_sf(data = au_states, aes(fill = NAME)) + labs(title = "Map of Australia") + theme_classic() + coord_sf(crs = st_crs(3112))
 ```
 
 ## Task 5
 Lastly, let's display the same map using `mapview()`. Load the `mapview` package.
 
 ```{r}
-#install.packages('mapview') # interactive display
+install.packages('mapview') # interactive display
 library(mapview)
 ```
 Create an interactive map of Australia using `mapview()`
 
 ```{r}
-
+mapview(au_states, zcol = "NAME")
 ```
 
 ## Task 6
 Let's display the capitals on the map like before. First convert the `au_capitals` dataframe to spatial dataframe object by running:
 ```{r}
+library(sf)
 capitals_geo <- st_as_sf(au_capitals, coords = c("lon", "lat"))
 ```
 
@@ -166,7 +172,7 @@ Now add the new spatial capitals object via + (that is, you can use the followin
 * You can use the option `col.regions='red'` to make capitals appear in color red, and `legend=F` in second `mapview()` to remove the uninformative second set of legend. 
 
 ```{r}
-
+mapview(au_states, zcol = "NAME") + mapview(capitals_geo, col.regions = "red", legend = F)
 ```
 
 
