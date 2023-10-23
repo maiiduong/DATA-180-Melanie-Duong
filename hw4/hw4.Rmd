@@ -42,26 +42,33 @@ Here are the variables included and their meanings:
 For the entire data, display the summary statistics (mean, median, mode, etc.) using the dplyr function `summary()` via pipe.
 
 ```{r}
-
+summary(records)
 ```
 # Question 2
 Return the count of cases where a record was broken in more than a year (365 days).
 
 ```{r}
-
+record_cases <- select(filter(records, record_duration >= 365))
+count_cases <- nrow(record_cases)
+count_cases
 ```
 # Question 3
 Return name of the player, name of the track, record date, and record duration for the record that took the longest time to be broken.
 
 ```{r}
-
+max_record <- max(records$record_duration)
+max_record
+longest_record <- select(filter(records, record_duration == max_record), track, player, date, record_duration)
+longest_record
 ```
 
 # Question 4
 Return the mean record time (`time`) by each track. What is the name of the track with the fastest average record time? *Hint: you should use `group_by() and summarize()*
 
 ```{r}
-
+grouped_track <- group_by(records, track)
+mean_values <- records%>% + grouped_track %>% + summarise(mean_values = mean(records, time))
+mean_values
 ```
 # Question 5
 Let's get the year from the `date` column and save it as a variable named `year`. You can use the function `substr(date, 1, 4)` which grabs the first 4 digits in the `date` column. Use this expression in `mutate()` to create a `year` column. (Don't forget to save/overwrite the dataframe returned to the original one!)
