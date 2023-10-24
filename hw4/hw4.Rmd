@@ -76,7 +76,8 @@ cat("The track with the fastest average record time is:", fastest_track$track)
 Let's get the year from the `date` column and save it as a variable named `year`. You can use the function `substr(date, 1, 4)` which grabs the first 4 digits in the `date` column. Use this expression in `mutate()` to create a `year` column. (Don't forget to save/overwrite the dataframe returned to the original one!)
 
 ```{r}
-
+year_record <- mutate(records, year = substr(date, 1, 4))
+year_record
 ```
 
 # Question 6
