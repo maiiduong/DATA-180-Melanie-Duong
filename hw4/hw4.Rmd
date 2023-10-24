@@ -66,10 +66,10 @@ longest_record
 Return the mean record time (`time`) by each track. What is the name of the track with the fastest average record time? *Hint: you should use `group_by() and summarize()*
 
 ```{r}
-mean_values <- records %>%group_by(track) %>% summarise(mean_time = mean(time))
+mean_values <- records %>%group_by(track) %>% summarise(mean_recordtime = mean(time))
 mean_values
-min_value <- min(mean_values$mean_time)
-fastest_track <- select(filter(mean_values, mean_time == min_value), track)
+min_value <- min(mean_values$mean_recordtime)
+fastest_track <- select(filter(mean_values, mean_recordtime == min_value), track)
 cat("The track with the fastest average record time is:", fastest_track$track)
 ```
 # Question 5
@@ -84,7 +84,8 @@ year_record
 Now get the average record time (`time`) by year.
 
 ```{r}
-
+mean_values <- records %>%group_by(year) %>% summarise(mean_recordtime = mean(time))
+mean_values
 ```
 # Question 7
 Continuing with your results in Question 6: Do you notice a trend across years? Are the record times getting faster, slower, or no clear pattern in time? Create a barplot where each year appears on the x axis (you can treat year as a categorical variable in this case) and y axis showing the mean record time in each year. Interpret your graph. *Hint: Use your code in Question 6, which returns the average record times by year, followed by ` %>% ggplot(aes(year,mean)) + geom_bar(stat='identity')` Hint2: To make your figure wider, you can insert fig.width=10 inside the curly brackets at the beginning of your r code chunk below, as {r, fig.width=10} which I already did for you below,*
