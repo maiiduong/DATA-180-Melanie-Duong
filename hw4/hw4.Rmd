@@ -91,6 +91,11 @@ mean_values
 Continuing with your results in Question 6: Do you notice a trend across years? Are the record times getting faster, slower, or no clear pattern in time? Create a barplot where each year appears on the x axis (you can treat year as a categorical variable in this case) and y axis showing the mean record time in each year. Interpret your graph. *Hint: Use your code in Question 6, which returns the average record times by year, followed by ` %>% ggplot(aes(year,mean)) + geom_bar(stat='identity')` Hint2: To make your figure wider, you can insert fig.width=10 inside the curly brackets at the beginning of your r code chunk below, as {r, fig.width=10} which I already did for you below,*
 
 ```{r, fig.width=10}
+library(ggplot2)
+mean_values <- records %>%group_by(year) %>% summarise(mean_recordtime = mean(time)) %>%ggplot(aes(year, mean_recordtime, fill = year)) + geom_bar(stat = 'identity') + labs(title =  "Average Record Time by Year", x = "Year", y = "Average time record") + theme_classic()
+mean_values
+
+# Overall, there is not a specific trend during the period of time. The record times fluctuated, hit the bottom in 2007 and reached the peak 10 years later. 
 
 ```
 
