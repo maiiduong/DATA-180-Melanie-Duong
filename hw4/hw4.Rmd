@@ -92,8 +92,8 @@ Continuing with your results in Question 6: Do you notice a trend across years? 
 
 ```{r, fig.width=10}
 library(ggplot2)
-mean_values <- records %>%group_by(year) %>% summarise(mean_recordtime = mean(time)) %>%ggplot(aes(year, mean_recordtime, fill = year)) + geom_bar(stat = 'identity') + labs(title =  "Average Record Time by Year", x = "Year", y = "Average time record") + theme_classic()
-mean_values
+average_record <- records %>%group_by(year) %>% summarise(mean_recordtime = mean(time)) %>%ggplot(aes(year, mean_recordtime, fill = year)) + geom_bar(stat = 'identity') + labs(title =  "Average Record Time by Year", x = "Year", y = "Average time record")
+average_record
 
 # Overall, there is not a specific trend during the period of time. The record times fluctuated, hit the bottom in 2007 and reached the peak 10 years later. 
 
@@ -105,13 +105,19 @@ Create two overlaid histograms by `type` on the same plot where each histogram s
 Note: Set `alpha=.5` for transparency.
 
 ```{r}
-
+library(ggplot2)
+average_recordtime <- records %>%ggplot(aes(x = time, fill = type)) + geom_histogram(alpha = .5, bins = 30) + labs(title = "Distribution of Record Time by Track Type", x = "Record Time", y = "Frequency")
+average_recordtime
 ```
 
 # Question 9
 Three Lap time reports the total time spent finishing three laps in total, as opposed to finishing a single lap. Let's divide all time observations with `type=="Three Lap"` by 3 to check whether **per lap** performance declines across Three Lap vs. Single Lap. Generate a new variable named `time_per` which is the time spent per round, and create two overlaid histograms of `type_per` by `type`. Hint: Use `mutate()`, and inside `mutate()` use `ifelse()` function to conditionally replace rows: e.g.., `ifelse(type=="Three Lap",time/3,time)` which divides `time` by three only if `type=="Three Lap"`.
 
 ```{r}
+library(ggplot2)
+time_perlap <- mutate(records, time_per = ifelse(type == "Three Lap", time / 3, time))
+perlap_performance <- time_perlap %>%ggplot(aes(x = time_per, fill = type)) + geom_histogram(position = "identity", alpha = .5, bins = 30) + labs(title = "Distribution of Record Time per Type", x = "Record Time per Lap", y = "Frequency")
+perlap_performance
 
 ```
 # Question 10
