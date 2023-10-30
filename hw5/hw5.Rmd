@@ -40,9 +40,10 @@ a) Use the filter and select commands to choose only vans from the `Cars93` data
 ```{r}
 library(MASS)
 library(dplyr)
-
-
-
+Vans93 <- select(filter(Cars93, Type == "Van"), Model, Price, EngineSize, Horsepower, MPG.highway, Length)
+Vans93
+number_of_Van <- nrow(Vans93)
+cat("The number of objects that Vans93 has are:", number_of_Van)
 ```
 
 b) Use the `dist` and `as.matrix` functions to find the distance matrix for the vans set using the Euclidean metric. Call this matrix `Vans_Euclidean`. You will need to remove the first column of the `Vans93` dataframe when you pass it into the `dist` function, since the variable `Model` is not an appropriate variable for the cluster variate. You can do this by passing in `Vans93[,-1]` or `Vans93[,2:6]` (or any other way you like), converting it to a matrix and storing it as `Vans_Euclidean`. Next, set the row and column names of `Vans_Euclidean` to the Models of the vans using the rownames and colnames functions, so that it is easier for us to see what object we have in each row/column. Hint: This can be done by typing
@@ -51,10 +52,20 @@ b) Use the `dist` and `as.matrix` functions to find the distance matrix for the 
 colnames(Vans_Euclidean)<-Vans93[,1]
 rownames(Vans_Euclidean)<-Vans93[,1]
 ```
+```{r}
+Vans_matrix <- as.matrix(Vans93[,-1])
+Vans_Euclidean <- dist(Vans_matrix)
+Vans_Euclidean
+#colnames(Vans_Euclidean)<-Vans93[,1]
+#rownames(Vans_Euclidean)<-Vans93[,1]
+```
 
 Finally, round the values in this matrix to the hundredths place (two decimal points). Paste the final version of the matrix `Vans_Euclidean` into your solutions. Which two Vans (give the models) have the shortest distance between them? Which two have the largest distance between them?
 ```{r}
-
+final_vans_Euclidean <- round(Vans_Euclidean, 2)
+final_vans_Euclidean
+shortestDist_model <- filter(min(final_vans_Euclidean))
+min_distance_models <- rownames(Vans_Euclidean)[shortestDist_model[, 1]]
 ```
 
 
@@ -77,12 +88,41 @@ Find (by hand) the inter-group distance between A = $\{O_1, O_4\}$ and B = $\{O_
 
 a) Nearest-neighbor
 
+```{r}
+d12 = 1
+d13 = 9
+d15 = 1.6
+d42 = 6
+d43 = 5
+d45 = 2
+dSAB = min(d12, d13, d15, d42, d43, d45)
+dSAB
+```
 
 
 b) Farthest-neighbor
-
+```{r}
+d12 = 1
+d13 = 9
+d15 = 1.6
+d42 = 6
+d43 = 5
+d45 = 2
+dSAB = max(d12, d13, d15, d42, d43, d45)
+dSAB
+```
 
 c) Average-neighbor
+```{r}
+d12 = 1
+d13 = 9
+d15 = 1.6
+d42 = 6
+d43 = 5
+d45 = 2
+dSAB = (d12 + d13 + d15 + d42 + d43 + d45)/(2*3)
+dSAB
+```
 
 # Question 4
 Consider the following dendrogram created by a hierarchical clustering of 11 frequently used English words.
