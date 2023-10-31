@@ -8,6 +8,7 @@ date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output: 
   html_document
 ---
+20/20. Good job Melanie. 
 
 **Due date:** October 26 beginning of class.
 
