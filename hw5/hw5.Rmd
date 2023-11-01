@@ -140,7 +140,13 @@ Consider the following dendrogram created by a hierarchical clustering of 11 fre
 
 Using this dendrogram, break these 11 words into five clusters. Call them $C_1 – C_5$ and put their members inside curly brackets, e.g. $C_2 = \{with, for\}$. Comment on your grouping using 1-2 sentences.
 
+C_1 = {and, but}
+C_2 = {in, on, with, for, at, from}
+C_3 = {of}
+C_4 = {to}
+C_5 = {as}
 
+I cut the dendogram at the middle to get 5 clusters and the members of each are listed above. 
 
 # Question 5
 Let's practice hierarchical clustering with the `vertebrate` dataset that is saved in the hw folder on GitHub. Animals are divided into two categories [vertebrates and invertebrates](https://www.oum.ox.ac.uk/thezone/animals/animalid/divide.htm#:~:text=Invertebrates%20-%20animals%20without%20a%20backbone,a%20vertebrate%20or%20an%20invertebrate.). Vertebrates are also divided within themselves into groups such as mammals, birds, reptiles.. Our task in this question is to identify groups within vertebrates that share similar traits.
