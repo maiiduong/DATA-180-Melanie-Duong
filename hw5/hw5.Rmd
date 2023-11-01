@@ -53,26 +53,46 @@ colnames(Vans_Euclidean)<-Vans93[,1]
 rownames(Vans_Euclidean)<-Vans93[,1]
 ```
 ```{r}
+<<<<<<< Updated upstream
 Vans_matrix <- as.matrix(Vans93[,-1])
 Vans_Euclidean <- dist(Vans_matrix)
 Vans_Euclidean
 #colnames(Vans_Euclidean)<-Vans93[,1]
 #rownames(Vans_Euclidean)<-Vans93[,1]
+=======
+Vans_Euclidean <- as.matrix(dist(Vans93[,-1]))
+colnames(Vans_Euclidean)<-Vans93[,1]
+rownames(Vans_Euclidean)<-Vans93[,1]
+Vans_Euclidean
+>>>>>>> Stashed changes
 ```
 
 Finally, round the values in this matrix to the hundredths place (two decimal points). Paste the final version of the matrix `Vans_Euclidean` into your solutions. Which two Vans (give the models) have the shortest distance between them? Which two have the largest distance between them?
 ```{r}
 final_vans_Euclidean <- round(Vans_Euclidean, 2)
 final_vans_Euclidean
+<<<<<<< Updated upstream
 shortestDist_model <- filter(min(final_vans_Euclidean))
 min_distance_models <- rownames(Vans_Euclidean)[shortestDist_model[, 1]]
+=======
+
+min_dist <- min(dist(final_vans_Euclidean))
+min_dist
+
+max_dist <- max(dist(final_vans_Euclidean))
+max_dist
+>>>>>>> Stashed changes
 ```
 
 
 
 c) Repeat the steps in part (b) but use the Manhattan metric and call the object `Vans_Manhattan`.
 ```{r}
+min_dist <- min(dist(final_vans_Euclidean, method = "manhattan"))
+min_dist
 
+max_dist <- max(dist(final_vans_Euclidean, method = "manhattan"))
+max_dist
 ```
 
 The vans with the shortest distance between them are the Quest and the MPV (5.0). The vans with the largest distance between them are the Lumina APV and the Eurovan (76.7).
@@ -138,24 +158,40 @@ Let's practice hierarchical clustering with the `vertebrate` dataset that is sav
 
 a) First, read in the `vertebrate.csv` file and store it in a dataframe object named `vertebrate`. How many rows does the dataframe have? Print the entire dataset in your solutions.
 ```{r}
-
+vertebrate <- read.csv("C:/Users/maidn/OneDrive/Desktop/DATA 180 Melanie Duong/DATA-180-Melanie-Duong/DATA-180-Melanie-Duong/hw5/vertebrate.csv")
+nrow(vertebrate)
+vertebrate
 ```
 
 b) Perform two separate clustering analyses of the data using the `hclust` function. Provide the dendrograms for both clustering methods.
+```{r}
+vertebrate_Eu_complete <- hclust(dist(vertebrate))
+vertebrate_Eu_complete
+plot(vertebrate_Eu_complete, cex = .75, xlab = "")
+
+vertebrate_Eu_single <- hclust(dist(vertebrate), method = "single")
+vertebrate_Eu_single
+plot(vertebrate_Eu_single, cex = .75, xlab = "")
+```
 
 (i)	using the Euclidean metric with complete linkage. Note: Similar to Question 2, start by creating a distance matrix named `vertebrate_euclidean` which should not include any text column. Add row and column names to the matrix from the `vertebrate` dataframe. Then apply `dist()` once again before feeding the matrix into `hclust()` function.
 ```{r}
 Ver_Euclidean<-as.matrix(dist(vertebrate[,-1]))
-
+colnames(Ver_Euclidean)<-vertebrate[,1]
+rownames(Ver_Euclidean)<-vertebrate[,1]
+Ver_Euclidean <- hclust(dist(Ver_Euclidean))
+Ver_Euclidean
 ```
 
 (ii)using the Manhattan metric with single linkage and
 ```{r}
-
+ver_man_single <- hclust(dist(vertebrate, method = "manhattan"), method = "single")
+ver_man_single
+plot(ver_man_single, lwd = 3, main = "Clustered vertebrates, Manhattan, Single linkage", sub = "", xlab = "Vertebrates", cex.lab = 1.25, hang = -1)
 ```
 
 Which method do you prefer?
-
+I would prefer to use Euclidean and Single linkage method. 
 
 In your dendrograms:
 
