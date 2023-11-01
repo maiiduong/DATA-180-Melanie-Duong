@@ -53,35 +53,24 @@ colnames(Vans_Euclidean)<-Vans93[,1]
 rownames(Vans_Euclidean)<-Vans93[,1]
 ```
 ```{r}
-<<<<<<< Updated upstream
-Vans_matrix <- as.matrix(Vans93[,-1])
-Vans_Euclidean <- dist(Vans_matrix)
-Vans_Euclidean
-#colnames(Vans_Euclidean)<-Vans93[,1]
-#rownames(Vans_Euclidean)<-Vans93[,1]
-=======
 Vans_Euclidean <- as.matrix(dist(Vans93[,-1]))
 colnames(Vans_Euclidean)<-Vans93[,1]
 rownames(Vans_Euclidean)<-Vans93[,1]
 Vans_Euclidean
->>>>>>> Stashed changes
+
 ```
 
 Finally, round the values in this matrix to the hundredths place (two decimal points). Paste the final version of the matrix `Vans_Euclidean` into your solutions. Which two Vans (give the models) have the shortest distance between them? Which two have the largest distance between them?
 ```{r}
 final_vans_Euclidean <- round(Vans_Euclidean, 2)
 final_vans_Euclidean
-<<<<<<< Updated upstream
-shortestDist_model <- filter(min(final_vans_Euclidean))
-min_distance_models <- rownames(Vans_Euclidean)[shortestDist_model[, 1]]
-=======
 
 min_dist <- min(dist(final_vans_Euclidean))
 min_dist
 
 max_dist <- max(dist(final_vans_Euclidean))
 max_dist
->>>>>>> Stashed changes
+
 ```
 
 
@@ -206,8 +195,11 @@ In your dendrograms:
 Bonus: (not required) generate the same dendrogram using the `ggdendro` package.
 
 ```{r}
-
-
+library(ggdendro)
+ver_dendo <- as.matrix(dist(vertebrate[,-1]))
+dd <- dist(scale(ver_dendo), method = "manhattan")
+hc <- hclust(dd, method = "single")
+ggdendrogram(hc)
 ```
 
 
