@@ -1,4 +1,4 @@
-Cluster_Ex<-read.csv("D:/Dickinson College Teaching/DATA 180/data/Cluster_Ex.csv") #"Path where your data is goes here"
+Cluster_Ex<-read.csv("C:/Users/maidn/OneDrive/Desktop/DATA 180 Melanie Duong/DATA-180-Melanie-Duong/DATA-180-Melanie-Duong/Cluster_Ex.csv") #"Path where your data is goes here"
 ls(Cluster_Ex)
 head(Cluster_Ex)
 
@@ -40,3 +40,13 @@ plot(Cluster_Ex_HC,cex=1.25,xlab="")
 
 
 plot(Cluster_Ex,hang=-1,main="Main",sub="Sub",lwd=2,cex=.8,xlab="",frame.plot=T)
+
+
+#using the ggdendro package
+install.packages("ggdendro")
+library(ggdendro)
+
+data(USArrests)
+dd <- dist(scale(USArrests), method = "euclidean")
+hc <- hclust(dd)
+ggdendrogram(hc)
