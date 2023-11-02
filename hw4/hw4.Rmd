@@ -2,12 +2,13 @@
 title: "HW 4: Dplyr"
 subtitle: "Data 180, Professor Kennedy"
 author: 
-  name: "Your Name"
-  email: "XXXX@dickinson.edu"
+  name: "Melanie Duong"
+  email: "duongng@dickinson.edu"
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output: 
   html_document
 ---
+20/20. Good job Melanie. 
 
 **Due date:** October 26 beginning of class.
 
@@ -42,44 +43,60 @@ Here are the variables included and their meanings:
 For the entire data, display the summary statistics (mean, median, mode, etc.) using the dplyr function `summary()` via pipe.
 
 ```{r}
-
+summary(records)
 ```
 # Question 2
 Return the count of cases where a record was broken in more than a year (365 days).
 
 ```{r}
-
+record_cases <- select(filter(records, record_duration > 365))
+count_cases <- nrow(record_cases)
+count_cases
 ```
 # Question 3
 Return name of the player, name of the track, record date, and record duration for the record that took the longest time to be broken.
 
 ```{r}
-
+max_record <- max(records$record_duration)
+max_record
+longest_record <- select(filter(records, record_duration == max_record), track, player, date, record_duration)
+longest_record 
 ```
 
 # Question 4
 Return the mean record time (`time`) by each track. What is the name of the track with the fastest average record time? *Hint: you should use `group_by() and summarize()*
 
 ```{r}
-
+mean_values <- records %>%group_by(track) %>% summarise(mean_recordtime = mean(time))
+mean_values
+min_value <- min(mean_values$mean_recordtime)
+fastest_track <- select(filter(mean_values, mean_recordtime == min_value), track)
+cat("The track with the fastest average record time is:", fastest_track$track)
 ```
 # Question 5
 Let's get the year from the `date` column and save it as a variable named `year`. You can use the function `substr(date, 1, 4)` which grabs the first 4 digits in the `date` column. Use this expression in `mutate()` to create a `year` column. (Don't forget to save/overwrite the dataframe returned to the original one!)
 
 ```{r}
-
+year_record <- mutate(records, year = substr(date, 1, 4))
+year_record
 ```
 
 # Question 6
 Now get the average record time (`time`) by year.
 
 ```{r}
-
+mean_values <- year_record %>%group_by(year) %>% summarise(mean_recordtime = mean(time))
+mean_values
 ```
 # Question 7
 Continuing with your results in Question 6: Do you notice a trend across years? Are the record times getting faster, slower, or no clear pattern in time? Create a barplot where each year appears on the x axis (you can treat year as a categorical variable in this case) and y axis showing the mean record time in each year. Interpret your graph. *Hint: Use your code in Question 6, which returns the average record times by year, followed by ` %>% ggplot(aes(year,mean)) + geom_bar(stat='identity')` Hint2: To make your figure wider, you can insert fig.width=10 inside the curly brackets at the beginning of your r code chunk below, as {r, fig.width=10} which I already did for you below,*
 
 ```{r, fig.width=10}
+library(ggplot2)
+average_record <- year_record %>%group_by(year) %>% summarise(mean_recordtime = mean(time)) %>%ggplot(aes(year, mean_recordtime, fill = year)) + geom_bar(stat = 'identity') + labs(title =  "Average Record Time by Year", x = "Year", y = "Average time record")
+average_record
+
+# Overall, there is not a specific trend during the period of time. The record times fluctuated, hit the bottom in 2007 and reached the peak 10 years later. 
 
 ```
 
@@ -89,27 +106,38 @@ Create two overlaid histograms by `type` on the same plot where each histogram s
 Note: Set `alpha=.5` for transparency.
 
 ```{r}
-
+library(ggplot2)
+average_recordtime <- records %>%ggplot(aes(x = time, fill = type)) + geom_histogram(alpha = .5, bins = 30) + labs(title = "Distribution of Record Time by Track Type", x = "Record Time", y = "Frequency")
+average_recordtime
 ```
 
 # Question 9
 Three Lap time reports the total time spent finishing three laps in total, as opposed to finishing a single lap. Let's divide all time observations with `type=="Three Lap"` by 3 to check whether **per lap** performance declines across Three Lap vs. Single Lap. Generate a new variable named `time_per` which is the time spent per round, and create two overlaid histograms of `type_per` by `type`. Hint: Use `mutate()`, and inside `mutate()` use `ifelse()` function to conditionally replace rows: e.g.., `ifelse(type=="Three Lap",time/3,time)` which divides `time` by three only if `type=="Three Lap"`.
 
 ```{r}
+library(ggplot2)
+time_perlap <- mutate(records, time_per = ifelse(type == "Three Lap", time / 3, time))
+perlap_performance <- time_perlap %>%ggplot(aes(x = time_per, fill = type)) + geom_histogram(position = "identity", alpha = .5, bins = 30) + labs(title = "Distribution of Record Time per Type", x = "Record Time per Lap", y = "Frequency")
+perlap_performance
 
 ```
 # Question 10
 There appears to be recent discoveries of shortcuts within some of the tracks causing a number of extraordinarily fast records set in `Three Lap` tracks (Have you noticed this in your graph in Question 9?). Replicate your histogram in Question 9 with `shortcut=="No"` filter.
 
 ```{r}
-
+library(ggplot2)
+time_perlap <- mutate(records, time_per = ifelse(type == "Three Lap", time / 3, time))
+perlap_performance <- time_perlap %>% filter(shortcut == "No") %>% ggplot(aes(x = time_per, fill = type)) + geom_histogram(position = "identity", alpha = .5, bins = 30) + labs(title = "Distribution of Record Time per Type", x = "Record Time per Lap", y = "Frequency")
+perlap_performance
 ```
 
 # Question 11
 Lastly, compare the mean `time` by `system_played`. Do you observe a difference across the two game systems? (Note: NTSC version of the game runs at 60 FPS (Frames Per Second), and PAL runs at 50 FPS!) Does this appear to affect performance of records set?
 
 ```{r}
-
+mean_time <- records %>%group_by(system_played) %>%summarise(mean_time = mean(time))
+mean_time
+#There are differences between the two system played. The mean time record of NTSC is around 79.9 while that of PAL is approximately 95.2. Therefore, it might affect performance of records set.
 ```
 
 You are done! 🏁 Don't forget to commit and push your .Rmd file to your Github repository before the due date. (Well... the checkered flag emoji is now super relevant for this assignment!)
