@@ -65,26 +65,22 @@ Finally, round the values in this matrix to the hundredths place (two decimal po
 final_vans_Euclidean <- round(Vans_Euclidean, 2)
 final_vans_Euclidean
 
-min_dist <- min(dist(final_vans_Euclidean))
-min_dist
-
-max_dist <- max(dist(final_vans_Euclidean))
-max_dist
-
+# The vans with the shortest distance between them are the Caravan and the Aerostar (3.44). The vans with the largest distance between them are the Lumina APV and the Eurovan (61.80).
 ```
 
 
 
 c) Repeat the steps in part (b) but use the Manhattan metric and call the object `Vans_Manhattan`.
 ```{r}
-min_dist <- min(dist(final_vans_Euclidean, method = "manhattan"))
-min_dist
+Vans_Manhattan <- as.matrix(dist(Vans93[,-1], method = "manhattan"))
+colnames(Vans_Manhattan)<-Vans93[,1]
+rownames(Vans_Manhattan)<-Vans93[,1]
+Vans_Manhattan
 
-max_dist <- max(dist(final_vans_Euclidean, method = "manhattan"))
-max_dist
+# The vans with the shortest distance between them are the Quest and the MPV (5.0). The vans with the largest distance between them are the Lumina APV and the Eurovan (76.7).
 ```
 
-The vans with the shortest distance between them are the Quest and the MPV (5.0). The vans with the largest distance between them are the Lumina APV and the Eurovan (76.7).
+
 
 # Question 3
 Suppose you are given the following 6 x 6 *distance matrix*:

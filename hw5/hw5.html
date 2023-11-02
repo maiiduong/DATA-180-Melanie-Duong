@@ -507,25 +507,36 @@ final_vans_Euclidean</code></pre>
 ## Silhouette   61.45
 ## Previa       29.17
 ## Eurovan       0.00</code></pre>
-<pre class="r"><code>min_dist &lt;- min(dist(final_vans_Euclidean))
-min_dist</code></pre>
-<pre><code>## [1] 8.063101</code></pre>
-<pre class="r"><code>max_dist &lt;- max(dist(final_vans_Euclidean))
-max_dist</code></pre>
-<pre><code>## [1] 116.7824</code></pre>
+<pre class="r"><code># The vans with the shortest distance between them are the Caravan and the Aerostar (3.44). The vans with the largest distance between them are the Lumina APV and the Eurovan (61.80).</code></pre>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Repeat the steps in part (b) but use the Manhattan metric and call
 the object <code>Vans_Manhattan</code>.</li>
 </ol>
-<pre class="r"><code>min_dist &lt;- min(dist(final_vans_Euclidean, method = &quot;manhattan&quot;))
-min_dist</code></pre>
-<pre><code>## [1] 22.78</code></pre>
-<pre class="r"><code>max_dist &lt;- max(dist(final_vans_Euclidean, method = &quot;manhattan&quot;))
-max_dist</code></pre>
-<pre><code>## [1] 309.82</code></pre>
-<p>The vans with the shortest distance between them are the Quest and
-the MPV (5.0). The vans with the largest distance between them are the
-Lumina APV and the Eurovan (76.7).</p>
+<pre class="r"><code>Vans_Manhattan &lt;- as.matrix(dist(Vans93[,-1], method = &quot;manhattan&quot;))
+colnames(Vans_Manhattan)&lt;-Vans93[,1]
+rownames(Vans_Manhattan)&lt;-Vans93[,1]
+Vans_Manhattan</code></pre>
+<pre><code>##            Lumina_APV Astro Caravan Aerostar  MPV Quest Silhouette Previa
+## Lumina_APV        0.0  24.8    36.5     34.4 31.6  34.6       19.2   49.8
+## Astro            24.8   0.0    46.7     42.6 21.8  24.8       11.4   44.0
+## Caravan          36.5  46.7     0.0      5.9 31.1  26.1       50.3   21.3
+## Aerostar         34.4  42.6     5.9      0.0 28.8  23.8       47.2   23.4
+## MPV              31.6  21.8    31.1     28.8  0.0   5.0       21.2   26.2
+## Quest            34.6  24.8    26.1     23.8  5.0   0.0       24.2   21.2
+## Silhouette       19.2  11.4    50.3     47.2 21.2  24.2        0.0   44.6
+## Previa           49.8  44.0    21.3     23.4 26.2  21.2       44.6    0.0
+## Eurovan          76.7  68.9    46.2     48.7 53.1  48.1       71.5   33.1
+##            Eurovan
+## Lumina_APV    76.7
+## Astro         68.9
+## Caravan       46.2
+## Aerostar      48.7
+## MPV           53.1
+## Quest         48.1
+## Silhouette    71.5
+## Previa        33.1
+## Eurovan        0.0</code></pre>
+<pre class="r"><code># The vans with the shortest distance between them are the Quest and the MPV (5.0). The vans with the largest distance between them are the Lumina APV and the Eurovan (76.7).</code></pre>
 </div>
 <div id="question-3" class="section level1">
 <h1>Question 3</h1>
