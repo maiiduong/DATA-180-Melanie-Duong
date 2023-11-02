@@ -182,7 +182,7 @@ plot(ver_man_single, lwd = 3, main = "Clustered vertebrates, Manhattan, Single l
 ```
 
 Which method do you prefer?
-I would prefer to use Euclidean and Single linkage method. 
+I would prefer to use Single linkage method. 
 
 In your dendrograms:
 
