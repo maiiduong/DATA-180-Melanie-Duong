@@ -50,7 +50,9 @@ Use hierarchical clustering (i.e. `hclust`) to cluster the animals based on the 
 *	Set the frame.plot argument to T to draw a box around the dendrograms
 
 ```{r}
-
+cluster_animals <- hclust(dist(Mammals_Milk_Std), method = "complete")
+cluster_animals
+plot(cluster_animals, lwd = 3, main = "Mamals Clustered by Std. Milk Composition \n Euclidean Metric, Complete Linkage", xlabs = "Mammals", cex.lab = 1.25, hang = -1, frame.plot = TRUE)
 ```
 
 # Question 3
