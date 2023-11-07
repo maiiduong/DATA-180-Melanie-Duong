@@ -61,6 +61,14 @@ For k = 3 and k = 4, perform a k-means clustering of the mammals based on their 
 ```{r}
 set.seed(125)
 
+MMilk_km_3 <- kmeans(Mammals_Milk_Std, centers = 3, nstart = 100)
+new_MammalsMilk3 <- Mammals_Milk %>% mutate(km_3 = MMilk_km_3$cluster) %>% arrange(km_3)
+new_MammalsMilk3
+
+MMilk_km_4 <- kmeans(Mammals_Milk_Std, centers = 4, nstart = 100)
+new_MammalsMilk4 <- Mammals_Milk %>% mutate(km_4 = MMilk_km_4$cluster) %>% arrange(km_4)
+new_MammalsMilk4
+
 ```
 
 # Question 4

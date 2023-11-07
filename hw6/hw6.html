@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2023-11-05" />
+<meta name="date" content="2023-11-06" />
 
 <title>HW 6</title>
 
@@ -354,7 +354,7 @@ display: none;
 <h4 class="author">Melanie Duong</h4>
 <a class="author_email" href="mailto:#"><a href="mailto:duongng@dickinson.edu" class="email">duongng@dickinson.edu</a></a>
 </address>
-<h4 class="date">November 05, 2023</h4>
+<h4 class="date">November 06, 2023</h4>
 
 </div>
 
@@ -461,7 +461,64 @@ the cluster membership columns, first for <code>km_3</code> and a second
 time for <code>km_4.</code> Print both sorted tables in your solutions
 here, one for the K = 3 solution sorting and a second one for the K = 4
 cluster solution sorting.</p>
-<pre class="r"><code>set.seed(125)</code></pre>
+<pre class="r"><code>set.seed(125)
+
+MMilk_km_3 &lt;- kmeans(Mammals_Milk_Std, centers = 3, nstart = 100)
+new_MammalsMilk3 &lt;- Mammals_Milk %&gt;% mutate(km_3 = MMilk_km_3$cluster) %&gt;% arrange(km_3)
+new_MammalsMilk3</code></pre>
+<pre><code>##            Water Protein  Fat Lactose  Ash km_3
+## Seal        46.4     9.7 42.0     0.0 0.85    1
+## Dolphin     44.9    10.6 34.9     0.9 0.53    1
+## Guinea Pig  81.9     7.4  7.2     2.7 0.85    2
+## Cat         81.6    10.1  6.3     4.4 0.75    2
+## Pig         82.8     7.1  5.1     3.7 1.10    2
+## Dog         76.3     9.3  9.5     3.0 1.20    2
+## Rat         72.5     9.2 12.6     3.3 1.40    2
+## Deer        65.9    10.4 19.7     2.6 1.40    2
+## Reindeer    64.8    10.7 20.3     2.5 1.40    2
+## Whale       64.8    11.1 21.2     1.6 0.85    2
+## Horse       90.1     2.6  1.0     6.9 0.35    3
+## Orangutan   88.5     1.4  3.5     6.0 0.24    3
+## Monkey      88.4     2.2  2.7     6.4 0.18    3
+## Donkey      90.3     1.7  1.4     6.2 0.40    3
+## Hippo       90.4     0.6  4.5     4.4 0.10    3
+## Camel       87.7     3.5  3.4     4.8 0.71    3
+## Bison       86.9     4.8  1.7     5.7 0.90    3
+## Buffalo     82.1     5.9  7.9     4.7 0.78    3
+## Fox         81.6     6.6  5.9     4.9 0.93    3
+## Llama       86.5     3.9  3.2     5.6 0.80    3
+## Mule        90.0     2.0  1.8     5.5 0.47    3
+## Zebra       86.2     3.0  4.8     5.3 0.70    3
+## Sheep       82.0     5.6  6.4     4.7 0.91    3
+## Elephant    70.7     3.6 17.6     5.6 0.63    3</code></pre>
+<pre class="r"><code>MMilk_km_4 &lt;- kmeans(Mammals_Milk_Std, centers = 4, nstart = 100)
+new_MammalsMilk4 &lt;- Mammals_Milk %&gt;% mutate(km_4 = MMilk_km_4$cluster) %&gt;% arrange(km_4)
+new_MammalsMilk4</code></pre>
+<pre><code>##            Water Protein  Fat Lactose  Ash km_4
+## Horse       90.1     2.6  1.0     6.9 0.35    1
+## Orangutan   88.5     1.4  3.5     6.0 0.24    1
+## Monkey      88.4     2.2  2.7     6.4 0.18    1
+## Donkey      90.3     1.7  1.4     6.2 0.40    1
+## Hippo       90.4     0.6  4.5     4.4 0.10    1
+## Mule        90.0     2.0  1.8     5.5 0.47    1
+## Camel       87.7     3.5  3.4     4.8 0.71    2
+## Bison       86.9     4.8  1.7     5.7 0.90    2
+## Buffalo     82.1     5.9  7.9     4.7 0.78    2
+## Guinea Pig  81.9     7.4  7.2     2.7 0.85    2
+## Cat         81.6    10.1  6.3     4.4 0.75    2
+## Fox         81.6     6.6  5.9     4.9 0.93    2
+## Llama       86.5     3.9  3.2     5.6 0.80    2
+## Pig         82.8     7.1  5.1     3.7 1.10    2
+## Zebra       86.2     3.0  4.8     5.3 0.70    2
+## Sheep       82.0     5.6  6.4     4.7 0.91    2
+## Elephant    70.7     3.6 17.6     5.6 0.63    2
+## Dog         76.3     9.3  9.5     3.0 1.20    3
+## Rat         72.5     9.2 12.6     3.3 1.40    3
+## Deer        65.9    10.4 19.7     2.6 1.40    3
+## Reindeer    64.8    10.7 20.3     2.5 1.40    3
+## Whale       64.8    11.1 21.2     1.6 0.85    3
+## Seal        46.4     9.7 42.0     0.0 0.85    4
+## Dolphin     44.9    10.6 34.9     0.9 0.53    4</code></pre>
 </div>
 <div id="question-4" class="section level1">
 <h1>Question 4</h1>
