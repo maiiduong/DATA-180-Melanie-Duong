@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2023-11-01" />
+<meta name="date" content="2023-11-07" />
 
 <title>HW 5</title>
 
@@ -354,7 +354,7 @@ display: none;
 <h4 class="author">Melanie Duong</h4>
 <a class="author_email" href="mailto:#"><a href="mailto:duongng@dickinson.edu" class="email">duongng@dickinson.edu</a></a>
 </address>
-<h4 class="date">November 01, 2023</h4>
+<h4 class="date">November 07, 2023</h4>
 
 </div>
 
@@ -409,10 +409,9 @@ errors with <code>select()</code>, try using
 <code>dplyr::select()</code> to avoid conflicts in <code>dplyr</code>
 and <code>MASS</code> packages.</li>
 </ol>
-<pre class="r"><code>library(MASS)</code></pre>
-<pre><code>## Warning: package &#39;MASS&#39; was built under R version 4.3.1</code></pre>
-<pre class="r"><code>library(dplyr)</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.3.1</code></pre>
+<pre class="r"><code>library(MASS)
+library(dplyr)</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.2.3</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:MASS&#39;:
@@ -621,7 +620,7 @@ is to identify groups within vertebrates that share similar traits.</p>
 a dataframe object named <code>vertebrate</code>. How many rows does the
 dataframe have? Print the entire dataset in your solutions.</li>
 </ol>
-<pre class="r"><code>vertebrate &lt;- read.csv(&quot;C:/Users/maidn/OneDrive/Desktop/DATA 180 Melanie Duong/DATA-180-Melanie-Duong/DATA-180-Melanie-Duong/hw5/vertebrate.csv&quot;)
+<pre class="r"><code>vertebrate &lt;- read.csv(&quot;D:/Dickinson College Teaching/DATA 180/hw5/vertebrate.csv&quot;)
 nrow(vertebrate)</code></pre>
 <pre><code>## [1] 15</code></pre>
 <pre class="r"><code>vertebrate</code></pre>
@@ -738,7 +737,7 @@ height.</li>
 <p>Bonus: (not required) generate the same dendrogram using the
 <code>ggdendro</code> package.</p>
 <pre class="r"><code>library(ggdendro)</code></pre>
-<pre><code>## Warning: package &#39;ggdendro&#39; was built under R version 4.3.1</code></pre>
+<pre><code>## Warning: package &#39;ggdendro&#39; was built under R version 4.2.3</code></pre>
 <pre class="r"><code>ver_dendo &lt;- as.matrix(dist(vertebrate[,-1]))</code></pre>
 <pre><code>## Warning in dist(vertebrate[, -1]): NAs introduced by coercion</code></pre>
 <pre class="r"><code>dd &lt;- dist(scale(ver_dendo), method = &quot;manhattan&quot;)
