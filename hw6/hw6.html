@@ -568,14 +568,16 @@ function <code>plot_grid()</code> that enables plotting multiple graphs
 side by side. See more in the cell below. Make sure to change
 <code>eval=F</code> to <code>eval=T</code> in its options when you
 execute the cell.</p>
-<pre class="r"><code>require(cowplot)
-graph1 &lt;- 
-graph2 &lt;- 
-graph3 &lt;- 
-graph4 &lt;- 
-graph5 &lt;- 
+<pre class="r"><code>install.packages(&quot;cowplot&quot;)
+library(cowplot)
+require(cowplot)
+graph1 &lt;- ggplot(new_MammalsMilk3, aes(x = km_3, y = Water)) + geom_boxplot()
+graph2 &lt;- ggplot(new_MammalsMilk3, aes(x = km_3, y = Protein)) + geom_boxplot()
+graph3 &lt;- ggplot(new_MammalsMilk3, aes(x = km_3, y = Fat)) + geom_boxplot()
+graph4 &lt;- ggplot(new_MammalsMilk3, aes(x = km_3, y = Lactose)) + geom_boxplot()
+graph5 &lt;- ggplot(new_MammalsMilk3, aes(x = km_3, y = Ash)) + geom_boxplot()
 
-plot_grid(graph1, graph2, graph3, graph4, graph5, labels = &quot;AUTO&quot;)</code></pre>
+plot_grid(graph1, graph2, graph3, graph4, graph5, labels = &quot;AUTO&quot;, eval = T)</code></pre>
 </div>
 <div id="question-6" class="section level1">
 <h1>Question 6</h1>
