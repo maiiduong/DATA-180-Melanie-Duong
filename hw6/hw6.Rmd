@@ -84,7 +84,11 @@ Use the `group_by` and `summarize` functions to provide tables summarizing the r
 Call the summary tables `MMilk_Agg_K3` and `MMilk_Agg_K4`. Round the elements in the data frames to the hundredths place and paste them into your solutions.
 
 ```{r}
+MMilk_Agg_K3 <- new_MammalsMilk3 %>% group_by(km_3) %>% summarise(Count = n(), Mean_Water = mean(Water), Mean_Protein = mean(Protein), Mean_Fat = mean(Fat), Mean_Lactose = mean(Lactose), Mean_Ash = mean(Ash))
+round(MMilk_Agg_K3, 2)
 
+MMilk_Agg_K4 <- new_MammalsMilk4 %>% group_by(km_4) %>% summarise(count = n(), Mean_Water = mean(Water), Mean_Protein = mean(Protein), Mean_Fat = mean(Fat), Mean_Lactose = mean(Lactose), Mean_Ash = mean(Ash))
+round(MMilk_Agg_K4, 2)
 ```
 # Question 5
 For the K=3 solution, make a set of boxplots showing the distribution of each variable by cluster membership. In total you should have five graphs (one for each variable in the dataset). Each graph should include three boxplots (one for each cluster). *Hint:* Use `ggplot2` with `geom_boxplot` and create five different ggplot objects. Name them as graph1, graph2,... as below. Finally, use the library named `cowplot` which includes the function `plot_grid()` that enables plotting multiple graphs side by side. See more in the cell below. Make sure to change `eval=F` to `eval=T` in its options when you execute the cell.
