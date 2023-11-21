@@ -34,6 +34,7 @@ Read the `news.csv` into R and create the object `news` using
 #library(tidyverse)
 library(tm)
 news<-read.csv("news.csv",header=T)
+news
 ```
 
 Read also the positive and negative word dictionaries, both found on Github. This will later come in handy:
@@ -49,13 +50,16 @@ head(negWords,15)
 # Question 1
 First, check how many years of news data we have loaded in in R.
 ```{r}
-
+range <- range(news$year)
+year_range = range[2] - range[1]
+year_range
 ```
 
 # Question 2
 Store the headlines column in a vector of text named `charVector`. Print the first 6 entries in the vector.
 ```{r}
-
+charVector <- news$headline_text
+head(charVector)
 ```
 
 # Question 3
