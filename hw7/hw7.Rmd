@@ -31,7 +31,7 @@ In this homework, we will analyze news headlines data scraped from abcnews, post
 Read the `news.csv` into R and create the object `news` using
 
 ```{r}
-#library(tidyverse)
+library(tidyverse)
 library(tm)
 news<-read.csv("news.csv",header=T)
 news
@@ -65,7 +65,8 @@ head(charVector)
 # Question 3
 Convert `charVector` into a vector source object named `wordVector` using the function `VectorSource()`. (See class notes on how to do this) Then convert `wordVector` into a corpus object named `wordCorpus` using the function `Corpus()`.
 ```{r}
-
+wordVector <- VectorSource(charVector)
+wordCorpus <- Corpus(wordVector)
 ```
 
 # Question 4
@@ -76,7 +77,8 @@ We are now ready to do some basic trimming on the text. Do the following on the 
 * Remove stopwords (e.g., the, a, at, etc.)
 
 ```{r}
-
+cleaned_text <- function(wordCorpus) {wordCorpus <- tolower(wordCorpus)%>% removeNumbers(wordCorpus)%>% removePunctuation(wordCorpus)%>% removeWords(wordCorpus, stopwords("english"))}
+tm_map(wordCorpus, cleaned_text)
 ```
 
 # Question 5
