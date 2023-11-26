@@ -77,8 +77,10 @@ We are now ready to do some basic trimming on the text. Do the following on the 
 * Remove stopwords (e.g., the, a, at, etc.)
 
 ```{r}
-cleaned_text <- function(wordCorpus) {wordCorpus <- tolower(wordCorpus)%>% removeNumbers(wordCorpus)%>% removePunctuation(wordCorpus)%>% removeWords(wordCorpus, stopwords("english"))}
-tm_map(wordCorpus, cleaned_text)
+tm_map(wordCorpus, tolower)
+tm_map(wordCorpus, removeNumbers)
+tm_map(wordCorpus, removePunctuation)
+tm_map(wordCorpus, removeWords, stopwords("english"))
 ```
 
 # Question 5
