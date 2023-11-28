@@ -86,13 +86,20 @@ tm_map(wordCorpus, removeWords, stopwords("english"))
 # Question 5
 What is a term document matrix? Explain. Create a term document matrix from the news vector and store it as an object named `tdm` using the function `TermDocumentMatrix`.
 ```{r}
+# Term document matrix is a mathematical matrix that represents the frequency of terms in a collection of document. It also represents the relationship between terms and documents, where each row stands for a term, and each column for a document, nd an entry is the number of occurrences of the terms in the documents.
 
+tdm <- TermDocumentMatrix(news)
 ```
 
 # Question 6
 Convert `tdm` into a matrix named `m`. Store the frequency of occurrence of each word in the news headlines in an object named `wordCounts`. Return the top 10 most frequent words. (Note: if you run into memory issues creating the matrix `m`, try using one of the computers in Tome.)
 ```{r}
-
+m <- as.matrix(tdm)
+wordCounts <- rowSums(m)
+wordCounts
+mostfrequenceWords <- sort(wordCounts, decreasing = TRUE)
+topWords <- head(mostfrequenceWords, 10)
+topWords
 ```
 
 # Question 7
