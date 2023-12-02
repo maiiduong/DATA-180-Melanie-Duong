@@ -33,15 +33,15 @@ Read the `news.csv` into R and create the object `news` using
 ```{r}
 library(tidyverse)
 library(tm)
-news<-read.csv("news.csv",header=T)
+news<-read.csv("C:/Users/maidn/OneDrive/Desktop/DATA 180 Melanie Duong/DATA-180-Melanie-Duong/DATA-180-Melanie-Duong/hw7/news.csv",header=T)
 news
 ```
 
 Read also the positive and negative word dictionaries, both found on Github. This will later come in handy:
 
 ```{r}
-posWords <- scan("positive-words.txt", character(0), sep = "\n")  # 2006 items
-negWords <- scan("negative-words.txt", character(0), sep = "\n")  # 4783 items
+posWords <- scan("C:/Users/maidn/OneDrive/Desktop/DATA 180 Melanie Duong/DATA-180-Melanie-Duong/DATA-180-Melanie-Duong/hw7/positive-words.txt", character(0), sep = "\n")  # 2006 items
+negWords <- scan("C:/Users/maidn/OneDrive/Desktop/DATA 180 Melanie Duong/DATA-180-Melanie-Duong/DATA-180-Melanie-Duong/hw7/negative-words.txt", character(0), sep = "\n")  # 4783 items
 head(posWords,15)
 head(negWords,15)
 ```
@@ -68,7 +68,7 @@ Convert `charVector` into a vector source object named `wordVector` using the fu
 ```{r}
 wordVector <- VectorSource(charVector)
 wordCorpus <- Corpus(wordVector)
-wordCorpus
+#wordCorpus
 ```
 
 # Question 4
@@ -97,6 +97,7 @@ tdm <- TermDocumentMatrix(wordCorpus)
 Convert `tdm` into a matrix named `m`. Store the frequency of occurrence of each word in the news headlines in an object named `wordCounts`. Return the top 10 most frequent words. (Note: if you run into memory issues creating the matrix `m`, try using one of the computers in Tome.)
 ```{r}
 m <- as.matrix(tdm)
+dim(m)
 wordCounts <- rowSums(m)
 #wordCounts
 wordFrequency <- sort(wordCounts, decreasing = TRUE)
@@ -108,7 +109,9 @@ topWords
 Create a barplot of the words that showed up at least 50 times in the news headlines. Rotate the x axis labels by 90 degrees, and decrease the label font size by 25%.
 
 ```{r}
-
+#selectedWords <- findFreqTerms(tdm, lowfreq = 50)
+#selectedWords
+barplot(wordCounts[wordFrequency >= 50], las = 2, cex.names = 0.5)
 ```
 
 
@@ -116,7 +119,24 @@ Create a barplot of the words that showed up at least 50 times in the news headl
 What is the percentage of positive words in the news headlines? What is the percentage of negative words? Make a barplot for each (for positive and negative words that showed up separately) showing the most frequent words for words that showed up at least 20 times. (Note: don't forget to get the total number of unique words that showed up in the data.)
 
 ```{r}
+# POSITIVE WORDS
+matchedP <- match(names(wordCounts), posWords, nomatch = 0)
+matchedP <- wordCounts[matchedP != 0]
+percentagePos <- (sum(matchedP)/length(wordCounts))*100
+percentagePos
+#length(wordCounts)
+#sum(matchedP)
+matchedPfreq <- matchedP[matchedP >= 20]
+#matchedPfreq
+barplot(matchedPfreq, las = 2, cex.names = 0.75)
 
+# NEGATIVE WORDS
+matchedN <- match(names(wordCounts), negWords, nomatch = 0)
+matchedN <- wordCounts[matchedN != 0]
+percentageNeg <- (sum(matchedN)/length(wordCounts))*100
+percentageNeg
+matchedNfreq <- matchedN[matchedN >= 20]
+barplot(matchedNfreq, las = 2, cex.names = 0.75)
 ```
 
 Let's get the number of articles published in each year and month. Note that the chunk below creates two new variables `count` and `yearmonth`:
