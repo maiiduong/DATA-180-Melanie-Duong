@@ -155,7 +155,7 @@ Let's now practice working with `quanteda` and `corpus` packages. Install the pa
 
 ```{r}
 library("quanteda")
-library('corpus')
+#library('corpus')
 ```
 
 # Question 10
@@ -165,15 +165,20 @@ Using the `term_stats()` function, return the 20 most frequent single words that
 * stopwords
 
 ```{r}
-#head(wordFrequency, 20)
-term_stats(charVector, ngrams = 1, filter = text_filter(drop_puct = TRUE, drop_symbol = TRUE, drop = stopwords_en))
-
+head(sort(termFreq(charVector), decreasing = TRUE), 20)
 ```
 
 # Question 11
 Repeat the previous question for word pairs (frequency of 2 words that show up, instead of 1 word)
 ```{r}
-term_stats(charVector, ngrams = 2, filter = text_filter(drop_puct = TRUE, drop_symbol = TRUE, drop = stopwords_en))
+#library(tokenizers)
+#tokenize_words(charVector)
+#head(tokenize_ngrams(charVector, n = 2), 20)
+install.packages("ngram")
+library(ngram)
+words <- paste(unlist(charVector), collapse =" ")
+ng <- ngram(words, n = 2)
+head(get.phrasetable(ng),20)
 ```
 
 # Question 12
@@ -198,15 +203,20 @@ Create a wordcloud of `news_dtm` using `textplot_wordcloud()`. Comment on words 
 ```{r}
 library("quanteda.textplots")
 wordCloud <- textplot_wordcloud(news_dtm)
-#
+# I'm not surprised seeing the words such as: polic, plan, report, new, say, call, interview, or court since these are the common words in the news. However, I'm surprised that words like: win, us, charg, water, or wa appear pretty much on the news headlines.
 ```
 
 
 Let's now do topic modeling. Make sure to load necessary packages via
 
 ```{r}
+#install.packages("reshape2")
+#install.packages("ggplot2")
+#library('reshape2')
 library("topicmodels")
 library('tidytext')
+library("dplyr")
+library("ggplot2")
 ```
 
 # Question 14
@@ -215,20 +225,56 @@ Run the LDA algorithm using k = 8. Store your output in object named `topic_mode
 ```{r}
 news_topics <- convert(news_dtm, to = "topicmodels")
 topic_model <- LDA(news_topics, method = "VEM", k = 8)
-terms(topic_model, 8)
+terms(topic_model, 10)
 ```
 
 
 # Question 15
 Plot betas of top 10 words with highest beta for each 8 topic. Comment on 3-4 news headline groups in terms of their topic content.
 ```{r}
+tidy_topics <- tidy(topic_model, matrix = "beta")
+tidy_topics
 
+news_top_topics <- tidy_topics %>%
+  group_by(topic) %>%
+  slice_max(beta, n = 10) %>% 
+  ungroup() %>% 
+  arrange(topic, -beta) 
+
+news_top_topics %>%
+  mutate(term = reorder_within(term, beta, topic)) %>% 
+  ggplot(aes(beta, term, fill = factor(topic))) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~topic, scales = "free") + 
+  scale_y_reordered() 
+
+# In the graph, words are classified into different groups with different topics. 
+# Topic 1 and topic 2 seem to be associated with crime or violent incidents. The words "kill," "say," and "charg" suggest a focus on reporting incidents, potentially criminal in nature, while the word "new" is a bit generic and might be context-dependent, and "nation" suggests that this is national issue.
+# Topic 3 could involve claims or assertions, potentially related to local governance ("council"), market-related issues, and health matters.
+# Topic 4 might be associated with legal proceedings ("court"), planning activities, law enforcement ("polic"), and Australian-related news.
 ```
 
 # Question 16
 Plot gammas of top 5 documents with highest gamma for each 8 topic. Return the contents of the 5 documents with highest gamma only for topics 1 and 2. Does it makes sense that these documents are assigned to topics 1 and 2 accordingly? Comment.
 ```{r}
+topic_model <- LDA(news_topics, method = "VEM", k = 8)
+terms(topic_model, 5)
+tidy_topics <- tidy(topic_model, matrix = "gamma")
 
+tidy_news <- tidy_topics %>% 
+  group_by(topic) %>%
+  slice_max(gamma, n = 5) %>% 
+  ungroup() %>%
+  arrange(document, -gamma)
+
+top_news %>%
+  mutate(document = reorder_within(document, gamma, topic)) %>%
+  ggplot(aes(gamma, document, fill = factor(topic))) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~topic, scales = "free") +
+  scale_y_reordered() 
+
+# The topics seem to align with the expected themes based on the top words and the content of the top documents.
 ```
 
 
