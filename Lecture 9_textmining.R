@@ -232,6 +232,7 @@ term_stats(charVector, ngrams = 1,filter = text_filter(drop_punct = TRUE, drop_s
 
 # Convert to corpus, reshape to paragraphs
 anthemcorpus <- corpus(charVector, docnames=anthems$country)
+anthemcorpus
 paras <- corpus_reshape(anthemcorpus, to="paragraphs")
 anthem_dtm <- dfm(paras, stem=TRUE, remove_punct=TRUE, remove_symbols = TRUE, remove_numbers = TRUE, remove=c(stopwords("english")))
 anthem_dtm <- dfm_remove(anthem_dtm, c("s","?","?",'thi'))

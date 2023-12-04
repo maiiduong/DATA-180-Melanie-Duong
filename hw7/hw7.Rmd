@@ -111,7 +111,7 @@ Create a barplot of the words that showed up at least 50 times in the news headl
 ```{r}
 #selectedWords <- findFreqTerms(tdm, lowfreq = 50)
 #selectedWords
-barplot(wordCounts[wordFrequency >= 50], las = 2, cex.names = 0.5)
+barplot(wordCounts[wordFrequency >= 50], las = 2, cex.names = 0.75, angle = 90)
 ```
 
 
@@ -122,19 +122,16 @@ What is the percentage of positive words in the news headlines? What is the perc
 # POSITIVE WORDS
 matchedP <- match(names(wordCounts), posWords, nomatch = 0)
 matchedP <- wordCounts[matchedP != 0]
-percentagePos <- (sum(matchedP)/length(wordCounts))*100
-percentagePos
-#length(wordCounts)
-#sum(matchedP)
+percentagePos <- (sum(matchedP)/sum(wordCounts))*100
+cat("The percentage of positive words in the news headlines:", percentagePos)
 matchedPfreq <- matchedP[matchedP >= 20]
-#matchedPfreq
 barplot(matchedPfreq, las = 2, cex.names = 0.75)
 
 # NEGATIVE WORDS
 matchedN <- match(names(wordCounts), negWords, nomatch = 0)
 matchedN <- wordCounts[matchedN != 0]
-percentageNeg <- (sum(matchedN)/length(wordCounts))*100
-percentageNeg
+percentageNeg <- (sum(matchedN)/sum(wordCounts))*100
+cat("The percentage of negative words in the news headlines:", percentageNeg)
 matchedNfreq <- matchedN[matchedN >= 20]
 barplot(matchedNfreq, las = 2, cex.names = 0.75)
 ```
@@ -143,12 +140,15 @@ Let's get the number of articles published in each year and month. Note that the
 
 ```{r}
 news <- news %>% group_by(year,month) %>% mutate(count=n(), yearmonth = paste(year, month,sep = '/')) %>% arrange(year,month,day)
+#news
 ```
 
 # Question 9
 Using `ggplot2`, create a barplot for the frequency of articles released in each year and month. On the x axis, you should have year month, e.g., 2003/10, 2003/11, 2003/12, 2004/1, on the y-axis you should have the number of articles released in the data. Do you see a change in the number of articles released across years? (Hint: use `factor()` with `levels=` options specified when you call `aes(x=)` to have a proper chronological sorting on your x axis. Use `+theme(axis.text=element_text(size=4,angle=90)` to fit the dates on the x axis.)
 
 ```{r}
+library(ggplot2)
+ggplot(news, aes(x = factor(yearmonth, levels = unique(yearmonth)))) + geom_bar() + labs(title = "Frequency of Articles Released by Month", x = "Month Year", y = "Number of Articles Released") +  theme(axis.text=element_text(size=4,angle=90))
 ```
 
 Let's now practice working with `quanteda` and `corpus` packages. Install the packages first if you don't have them in your computer and load them in in R.
@@ -165,29 +165,40 @@ Using the `term_stats()` function, return the 20 most frequent single words that
 * stopwords
 
 ```{r}
+#head(wordFrequency, 20)
+term_stats(charVector, ngrams = 1, filter = text_filter(drop_puct = TRUE, drop_symbol = TRUE, drop = stopwords_en))
 
 ```
 
 # Question 11
 Repeat the previous question for word pairs (frequency of 2 words that show up, instead of 1 word)
 ```{r}
+term_stats(charVector, ngrams = 2, filter = text_filter(drop_puct = TRUE, drop_symbol = TRUE, drop = stopwords_en))
 ```
 
 # Question 12
 Create a corpus object using `corpus()` function. Store it in an object named `newscorpus`. Convert `newscorpus` into paragraphs with `corpus_reshape()`.
 ```{r}
+newscorpus <- corpus(charVector)
+paragraphs <- corpus_reshape(newscorpus)
+paragraphs
 ```
 
 # Question 13
 Create a term document matrix named `news_dtm` by using the `dfm()` function. While you call `dfm()`, make sure to clean the paragraphs by keeping only the stems of the words, removing punctuations, removing symbols, removing numbers, and removing stopwords. If you wish to get rid of anything that does not look correct in the data (such as weird bunch of characters that show up as "words") you may trim them out at this stage using `dfm_remove()`. Finally, trim `news_dtm` such that it contains only words that show up at least 50 times. Print the first 6 rows of `news_dtm`. (Note: Again, ignore warnings.)
 ```{r}
+news_dtm <- dfm(paragraphs, stem = TRUE, remove_punct = TRUE, remove_symbols = TRUE, remove_numbers = TRUE, remove = c(stopwords("english")))
+news_dtm <- dfm_remove(news_dtm, c("s", "?", "thi"))
+news_dtm <- dfm_trim(news_dtm, min_termfreq = 50)
+head(colnames(news_dtm))
 ```
 
 # Question 14
 Create a wordcloud of `news_dtm` using `textplot_wordcloud()`. Comment on words that you were surprised and not surprised to see in the news headlines dataset.
 ```{r}
 library("quanteda.textplots")
-
+wordCloud <- textplot_wordcloud(news_dtm)
+#
 ```
 
 
@@ -202,7 +213,9 @@ library('tidytext')
 Run the LDA algorithm using k = 8. Store your output in object named `topic_model`. Print the 10 most frequent words that occurred in each 8 topic.
 
 ```{r}
-
+news_topics <- convert(news_dtm, to = "topicmodels")
+topic_model <- LDA(news_topics, method = "VEM", k = 8)
+terms(topic_model, 8)
 ```
 
 
