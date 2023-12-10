@@ -1,0 +1,67 @@
+---
+title: "DATA 180 Final Exam"
+author: "Melanie Duong"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+Load the dataset in.
+```{r}
+loan_default <- read.csv("C:/Users/maidn/OneDrive/Desktop/DATA 180 Melanie Duong/DATA-180-Melanie-Duong/DATA-180-Melanie-Duong/loan_default_data_set.csv")
+loan_default
+```
+
+1. Data Wrangling
+
+a. What is the dimension(shape) of the dataset? How many rows and columns does the dataset have?
+```{r}
+dim(loan_default)
+print("The dataset has 20000 rows and 21 columns.")
+```
+
+b. Report the column names of the dataset.
+```{r}
+colnames(loan_default)
+```
+
+c. Which types of data are in the dataset? Numeric, categorical, ordinal?
+```{r}
+print("The types of data in the dataset are: numeric and ordinal.")
+```
+
+d. Which columns contain missing values and how much (what percent) of those columns are missing?
+```{r}
+colnames(loan_default)[colSums(is.na(loan_default)) > 0]
+
+colMissingValue <- colnames(loan_default)[colSums(is.na(loan_default)) > 0]
+percent_missing <- (colSums(is.na(loan_default[, colMissingValue])) / nrow(loan_default)) * 100
+percent_missing
+```
+
+e. How do you think we should deal with missing values?
+```{r}
+# As far as I observed, there are several ways to fix missing values. First of all, we can remove rows or columns that contain missing values. For this dataset, we should remove rows because the amount of missing data is quiet small. If the amount of missing data is substantial, we should delete all the column.
+# Another way to deal with missing values is imputation. In this method, we can replace the missing values by the mean or mode values.
+# The third method I can think of is to create a new category to represent missing values.
+```
+
+
+f. With this data, would you fit a supervised or unsupervised learning model? Why?
+```{r}
+# In my opiion, this seems to be an unsupervised learning model because the variables in this dataset are independent variables, which means that that do not have have impacts on each other. 
+```
+
+g.	For part 2 and 3 drop all rows of the data that contain missing values. Print the dimensions of the resulting data set that has no missing values.
+```{r}
+no_missing_loan <- na.omit(loan_default)
+no_missing_loan
+dim(no_missing_loan)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
