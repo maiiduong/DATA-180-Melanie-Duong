@@ -9,8 +9,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
 Load the dataset in.
 ```{r}
 loan_default <- read.csv("C:/Users/maidn/OneDrive/Desktop/DATA 180 Melanie Duong/DATA-180-Melanie-Duong/DATA-180-Melanie-Duong/loan_default_data_set.csv")
@@ -54,7 +52,7 @@ e. How do you think we should deal with missing values?
 
 f. With this data, would you fit a supervised or unsupervised learning model? Why?
 ```{r}
-# In my opiion, this seems to be an unsupervised learning model because the variables in this dataset are independent variables, which means that that do not have have impacts on each other. 
+# In my opinion, this seems to be an unsupervised learning model because the variables in this data set are independent variables, which means that that do not have have impacts on each other. 
 ```
 
 g.	For part 2 and 3 drop all rows of the data that contain missing values. Print the dimensions of the resulting data set that has no missing values.
@@ -62,6 +60,34 @@ g.	For part 2 and 3 drop all rows of the data that contain missing values. Print
 no_missing_loan <- na.omit(loan_default)
 no_missing_loan
 dim(no_missing_loan)
+```
+
+2. Data summary statistic
+
+a. Find the summary statistics of the data set. You can use summary function from dplyr. 
+```{r}
+library(dplyr)
+summary(no_missing_loan)
+```
+b.	Based on the mean, mode, and median, is “num_card_inq_24_month” bell shaped, left, right skewed? How about “tot_amount_currently_past_due”? “credit_age”? 
+```{r}
+# Because median is smaller than mean (0<1.044) so "num_card_ing_24_month" is right skewed.
+# "tot_amount_currently_past_due" is also right skewed because median is smaller than mean (0<354.2).
+# "credit_age" is bell-shaped because median approximately equals to mean (281 and 208.9).
+```
+
+c. Plot a histogram of the variables in b above. Do the shapes of histograms confirm the skewness you found in b?
+```{r}
+hist(loan_default$num_card_inq_24_month, main = "Histogram of number_cards_ing_24_month", xlab = "Values", ylab = "Frequency", col = "lightpink")
+hist(loan_default$tot_amount_currently_past_due, main = "Histogram of tot_amount_currently_past_due", xlab = "Values", ylab = "Frequency", col = "lightpink")
+hist(loan_default$credit_age, main = "Histogram of credit_age", xlab = "Values", ylab = "Frequency", col = "lightpink")
+
+# The shapes of histograms match the skewness of each variable I found in part b.
+```
+
+d.	How would your convert the “rep_education” column into numerical data? Name two ways. 
+```{r}
+# As I have learned, two ways to convert text to numerical data are: Counting vectorization and Term frequency-Inverse document frequency.
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
