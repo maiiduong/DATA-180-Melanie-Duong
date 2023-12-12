@@ -15,6 +15,7 @@ loan_default <- read.csv("C:/Users/maidn/OneDrive/Desktop/DATA 180 Melanie Duong
 loan_default
 ```
 
+
 1. Data Wrangling
 
 a. What is the dimension(shape) of the dataset? How many rows and columns does the dataset have?
@@ -62,6 +63,7 @@ no_missing_loan
 dim(no_missing_loan)
 ```
 
+
 2. Data summary statistic
 
 a. Find the summary statistics of the data set. You can use summary function from dplyr. 
@@ -78,9 +80,9 @@ b.	Based on the mean, mode, and median, is “num_card_inq_24_month” bell shap
 
 c. Plot a histogram of the variables in b above. Do the shapes of histograms confirm the skewness you found in b?
 ```{r}
-hist(loan_default$num_card_inq_24_month, main = "Histogram of number_cards_ing_24_month", xlab = "Values", ylab = "Frequency", col = "lightpink")
-hist(loan_default$tot_amount_currently_past_due, main = "Histogram of tot_amount_currently_past_due", xlab = "Values", ylab = "Frequency", col = "lightpink")
-hist(loan_default$credit_age, main = "Histogram of credit_age", xlab = "Values", ylab = "Frequency", col = "lightpink")
+hist(loan_default$num_card_inq_24_month, main = "Histogram of Number of Credit Card Inquiries in last 24 Months", xlab = "Number of Credit Card", ylab = "Frequency", col = "lightpink")
+hist(loan_default$tot_amount_currently_past_due, main = "Histogram of Total Amount Past due currently for all Credit Accounts", xlab = "Total amount past due", ylab = "Frequency", col = "lightpink")
+hist(loan_default$credit_age, main = "Histogram of Age in Months of First Credit Product Obtained by the Applicant", xlab = "Age in months of first credit product", ylab = "Frequency", col = "lightpink")
 
 # The shapes of histograms match the skewness of each variable I found in part b.
 ```
@@ -88,6 +90,33 @@ hist(loan_default$credit_age, main = "Histogram of credit_age", xlab = "Values",
 d.	How would your convert the “rep_education” column into numerical data? Name two ways. 
 ```{r}
 # As I have learned, two ways to convert text to numerical data are: Counting vectorization and Term frequency-Inverse document frequency.
+```
+
+
+3. Data Visualization:
+
+a. Plot a bar graph for the “Def_Ind” column and describe it. 
+```{r}
+library(ggplot2)
+ggplot(loan_default, aes(x = Def_ind)) + geom_bar(fill = "lightpink", color = "black") + labs(title = "Bar Graph of Indicator of Default", x = "Indicator of default", y = "Frequency")
+
+# This bar graph displays the indicator of default. The x-axis of the graph contains two values which are 0 and 1. 1 is account defaulted after an account was approved and opened with the bank in the past 18 months while 0 means not defaulted. The y-axis shows the frequency of each value. There are around 2480 accounts that are defaulted but almost 18000 accounts are not defaulted. The distribution reveals the prevalence of default within the data set, providing a clear understanding of the number of accounts facing financial difficulties. Overall, the proportion of accounts defaulted are approximately 9 times less than the proportion of accounts that are not defaulted. Doing further analysis can find out factors leading to this situation as well as potential risks.    
+```
+
+b.	Plot a bar graph for the “rep_education" column and describe it.
+```{r}
+library(ggplot2)
+ggplot(loan_default, aes(x = rep_education)) + geom_bar(fill = "lightpink", color = "black") + labs(title = "Bar Graph of Education Level", x = "Education level", y = "Count")
+
+# This graph depicts the education levels of applicants in the data set. The x-axis categorizes education into four levels which are: graduate degree, college degree, high-school or below and other. The y-axis gives us the number of time each of these levels appears. According to the bar graph, the majority of applicants reported that they are in college (about 12450 applicants). In the second place is high-school or below with 5500 applicants and then is 2500 graduate applicants and 200 applicants in other education level. This distribution not only provides insights into the education landscape of the applicant pool but also highlight the prevalence of college-level education among them.
+```
+
+c. Plot a histogram of the “rep_income” variable.
+```{r}
+library(ggplot2)
+ggplot(loan_default, aes(x = rep_income)) + geom_histogram(fill = "lightpink", color = "black") + labs(title = "Histogram of Annual Income", x = "Income", y = "Frequency")
+
+# The histogram illustrates the annual income distribution among applicants in the data set. The bell-shaped distribution in the graph suggests a balanced and symmetrical pattern in the income data. This symmetry indicates that the mean, median and mode approximately equal to each other. Overall, most of applicants have income range from $100,000 to $200,000 (1e+05 to 2e+05) with the mean of $166,504 and median of $166,630. The reported descriptive statistics combined with the visual representation paint a comprehensive picture of the income landscape, which reveals a central tendency around the mean income values.
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
