@@ -45,7 +45,7 @@ percent_missing
 
 e. How do you think we should deal with missing values?
 ```{r}
-# As far as I observed, there are several ways to fix missing values. First of all, we can remove rows or columns that contain missing values. For this dataset, we should remove rows because the amount of missing data is quiet small. If the amount of missing data is substantial, we should delete all the column.
+# As far as I observed, there are several ways to fix missing values. First of all, we can remove rows or columns that contain missing values. For this data set, we should remove rows because the amount of missing data is quiet small. If the amount of missing data is substantial, we should delete all the column.
 # Another way to deal with missing values is imputation. In this method, we can replace the missing values by the mean or mode values.
 # The third method I can think of is to create a new category to represent missing values.
 ```
