@@ -31,6 +31,7 @@ colnames(loan_default)
 
 c. Which types of data are in the dataset? Numeric, categorical, ordinal?
 ```{r}
+str(loan_default)
 print("The types of data in the dataset are: numeric and ordinal.")
 ```
 
@@ -98,9 +99,7 @@ d.	How would your convert the “rep_education” column into numerical data? Na
 a. Plot a bar graph for the “Def_Ind” column and describe it. 
 ```{r}
 library(ggplot2)
-ggplot(loan_default, aes(x = Def_ind)) + geom_bar(fill = "lightpink", color = "black") + labs(title = "Bar Graph of Indicator of Default", x = "Indicator of default", y = "Frequency")
-
-# This bar graph displays the indicator of default. The x-axis of the graph contains two values which are 0 and 1. 1 is account defaulted after an account was approved and opened with the bank in the past 18 months while 0 means not defaulted. The y-axis shows the frequency of each value. There are around 2480 accounts that are defaulted but almost 18000 accounts are not defaulted. The distribution reveals the prevalence of default within the data set, providing a clear understanding of the number of accounts facing financial difficulties. Overall, the proportion of accounts defaulted are approximately 9 times less than the proportion of accounts that are not defaulted. Doing further analysis can find out factors leading to this situation as well as potential risks.    
+ggplot(loan_default, aes(x = Def_ind)) + geom_bar(fill = 'lightpink', color = "black") + labs(title = "Bar Graph of Indicator of Default", x = 'Indicator of Default', y = 'Frequeny' )
 ```
 
 b.	Plot a bar graph for the “rep_education" column and describe it.
@@ -108,15 +107,22 @@ b.	Plot a bar graph for the “rep_education" column and describe it.
 library(ggplot2)
 ggplot(loan_default, aes(x = rep_education)) + geom_bar(fill = "lightpink", color = "black") + labs(title = "Bar Graph of Education Level", x = "Education level", y = "Count")
 
-# This graph depicts the education levels of applicants in the data set. The x-axis categorizes education into four levels which are: graduate degree, college degree, high-school or below and other. The y-axis gives us the number of time each of these levels appears. According to the bar graph, the majority of applicants reported that they are in college (about 12450 applicants). In the second place is high-school or below with 5500 applicants and then is 2500 graduate applicants and 200 applicants in other education level. This distribution not only provides insights into the education landscape of the applicant pool but also highlight the prevalence of college-level education among them.
+# This graph depicts the education levels of applicants in the data set. The x-axis categorizes education into four levels which are: graduate degree, college degree, high-school or below and others. The y-axis gives us the number of times each of these levels appears. According to the bar graph, the majority of applicants reported that they are in college (about 12450 applicants). In second place is high-school or below with 5500 applicants and then is 2500 graduate applicants and 200 applicants in other education level. This distribution not only provides insights into the education landscape of the applicant pool but also highlights the prevalence of college-level education among them.
+
 ```
 
 c. Plot a histogram of the “rep_income” variable.
 ```{r}
 library(ggplot2)
 ggplot(loan_default, aes(x = rep_income)) + geom_histogram(fill = "lightpink", color = "black") + labs(title = "Histogram of Annual Income", x = "Income", y = "Frequency")
+# The histogram illustrates the annual income distribution among applicants in the data set. The bell-shaped distribution in the graph suggests a balanced and symmetrical pattern in the income data. This symmetry indicates that the mean, median and mode are approximately equal. Overall, most applicants have income ranges from $100,000 to $200,000 (1e+05 to 2e+05) with the mean of $166,504 and median of $166,630. The reported descriptive statistics combined with the visual representation paint a comprehensive picture of the income landscape, which reveals a central tendency around the mean income values.
 
-# The histogram illustrates the annual income distribution among applicants in the data set. The bell-shaped distribution in the graph suggests a balanced and symmetrical pattern in the income data. This symmetry indicates that the mean, median and mode approximately equal to each other. Overall, most of applicants have income range from $100,000 to $200,000 (1e+05 to 2e+05) with the mean of $166,504 and median of $166,630. The reported descriptive statistics combined with the visual representation paint a comprehensive picture of the income landscape, which reveals a central tendency around the mean income values.
+```
+
+d. Plot a boxplot of the “tot_balance” variable. Using the box plot report the five number summary of the variable? Are there any outliers for this variable? 
+```{r}
+library(ggplot2)
+ggplot(loan_default, aes(x = tot_balance)) + geom_boxplot() + labs(title = "Box plot of Total Balance", x = 'Total balance', y = 'Frequency')
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
