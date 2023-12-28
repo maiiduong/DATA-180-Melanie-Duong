@@ -4,6 +4,7 @@ author: "Melanie Duong"
 date: "`r Sys.Date()`"
 output: html_document
 ---
+38/40
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -11,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Load the dataset in.
 ```{r}
-loan_default <- read.csv("C:/Users/maidn/OneDrive/Desktop/DATA 180 Melanie Duong/DATA-180-Melanie-Duong/DATA-180-Melanie-Duong/loan_default_data_set.csv")
+loan_default <- read.csv("C:/Users/rodge/OneDrive/Desktop/DATA 180 -Intoduction to Data Science/DATA-180-Introduction-to-Data-Science--Section-2/data/loan_default_data_set.csv")
 loan_default
 ```
 
@@ -54,6 +55,8 @@ e. How do you think we should deal with missing values?
 f. With this data, would you fit a supervised or unsupervised learning model? Why?
 ```{r}
 # In my opinion, this seems to be an unsupervised learning model because the variables in this data set are independent variables, which means that that do not have have impacts on each other. 
+
+# You would fit a supervised learning model because you have very clear dependent and independent variables.(-2)
 ```
 
 g.	For part 2 and 3 drop all rows of the data that contain missing values. Print the dimensions of the resulting data set that has no missing values.
@@ -90,6 +93,8 @@ hist(loan_default$credit_age, main = "Histogram of Age in Months of First Credit
 d.	How would your convert the “rep_education” column into numerical data? Name two ways. 
 ```{r}
 # As I have learned, two ways to convert text to numerical data are: Counting vectorization and Term frequency-Inverse document frequency.
+
+# very good.
 ```
 
 
